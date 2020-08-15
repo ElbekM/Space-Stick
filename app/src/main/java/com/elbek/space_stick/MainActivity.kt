@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.FrameLayout
+import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
 import com.elbek.space_stick.screens.main.MainFragment
 
 class MainActivity : AppCompatActivity() {

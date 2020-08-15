@@ -25,7 +25,7 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
         viewModel.init()
     }
 
-    private fun bindViewModel() {
+    override fun bindViewModel() {
 
     }
 

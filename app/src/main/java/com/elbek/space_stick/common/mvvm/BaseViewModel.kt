@@ -2,9 +2,10 @@ package com.elbek.space_stick.common.mvvm
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.annotation.StringRes
 import com.elbek.space_stick.common.mvvm.commands.Command
+import com.elbek.space_stick.common.mvvm.commands.TCommand
 import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
@@ -15,6 +16,7 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     protected val context: Context by lazy { getApplication<Application>() }
 
     val closeCommand = Command()
+    val showMessageCommand = TCommand<String>()
 
     open fun destroy() {
         subscriptions.forEach { it.dispose() }
@@ -29,7 +31,18 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         subscriptionsWhileVisible.forEach { it.dispose() }
         subscriptionsWhileVisible.clear()
     }
-}
 
-fun BaseViewModel.getString(@StringRes resId: Int, vararg formatArgs: Any): String =
-    this.getApplication<Application>().getString(resId, *formatArgs)
+    protected fun processError(
+        tag: String = "SpaceStickApp",
+        error: Throwable,
+        display: Boolean = true
+    ) {
+        Log.e(tag, error.localizedMessage!!)
+
+        if (display) showToast("Something went wrong")
+    }
+
+    protected fun showToast(message: String) = showMessageCommand.call(message)
+
+    protected fun Disposable.addToSubscriptions() { subscriptions.add(this) }
+}

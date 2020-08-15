@@ -3,13 +3,20 @@ package com.elbek.space_stick.common.mvvm
 import com.elbek.space_stick.R
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.KeyEvent
+import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-
+import androidx.lifecycle.Observer
 
 abstract class BaseDialogFragment<TViewModel> : DialogFragment() where TViewModel : BaseViewModel {
     private val originalScreenOrientationKey: String = ::originalScreenOrientationKey.name
@@ -32,7 +39,6 @@ abstract class BaseDialogFragment<TViewModel> : DialogFragment() where TViewMode
         viewModel.destroy()
     }
 
-    @SuppressLint("SourceLockedOrientationActivity")
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -59,13 +65,51 @@ abstract class BaseDialogFragment<TViewModel> : DialogFragment() where TViewMode
         viewModel.stop()
     }
 
-    protected open fun onBackPressed() = viewModel.back()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun setupDialog(dialog: Dialog, style: Int) {
+        super.setupDialog(dialog, style)
+
+        dialog.setOnKeyListener(DialogInterface.OnKeyListener { _, i, keyEvent ->
+            if (i == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
+                // Workaround to avoid multiple calls of KeyListener.
+                // It prevents closing multiple fragments at one time.
+                Handler(Looper.getMainLooper()).postDelayed({ onBackPressed() }, 100)
+                return@OnKeyListener true
+
+            } else {
+                return@OnKeyListener false
+            }
+        })
+    }
+
+    protected open fun bindViewModel() {
+
+        viewModel.closeCommand.observe(this, Observer {
+            close()
+        })
+
+        viewModel.showMessageCommand.observe(this, Observer {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        })
+
+    }
 
     protected open fun close() = dismissAllowingStateLoss()
 
-    fun showAllowingStateLoss(manager: FragmentManager) =
-        manager.beginTransaction().add(this, tag).addToBackStack(tag).commitAllowingStateLoss()
+    protected open fun onBackPressed() = viewModel.back()
 }
+
+fun DialogFragment.showAllowingStateLoss(fm: FragmentManager, tag: String = this::class.java.name) =
+    fm.beginTransaction()
+        .add(this, tag)
+        .addToBackStack(tag)
+        .commitAllowingStateLoss()
 
 val Fragment.parent: Any?
     get() = parentFragment ?: activity
+
+inline fun <reified T> Fragment.castParent(): T? = parent as? T
