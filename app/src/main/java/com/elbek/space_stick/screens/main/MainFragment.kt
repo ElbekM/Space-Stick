@@ -30,7 +30,7 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
     }
 
     private fun initViews() {
-        Toast.makeText(context, "YEEEE", Toast.LENGTH_LONG).show()
+
     }
 
     companion object {
