@@ -3,6 +3,7 @@ package com.elbek.space_stick
 import android.content.Context
 import com.elbek.space_stick.api.ApiController
 import com.elbek.space_stick.api.ApiServiceProvider
+import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.screens.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.experimental.dsl.viewModel
@@ -15,6 +16,7 @@ fun initDI(context: Context) {
         androidContext(context)
         modules(module {
             single<ApiServiceProvider>()
+            single<StickService>()
 
             single {
                 this.get<ApiServiceProvider>(ApiServiceProvider::class, null, null)
