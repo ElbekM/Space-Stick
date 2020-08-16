@@ -3,36 +3,37 @@ package com.elbek.space_stick.common.mvvm
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import com.elbek.space_stick.common.mvvm.commands.Command
 import com.elbek.space_stick.common.mvvm.commands.TCommand
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
+import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
+abstract class BaseViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
 
-    private val subscriptions: MutableList<Disposable> = mutableListOf()
-    private val subscriptionsWhileVisible: MutableList<Disposable> = mutableListOf()
+    override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
+
+    override fun onCleared() = coroutineContext.cancel()
 
     protected val context: Context by lazy { getApplication<Application>() }
 
     val closeCommand = Command()
     val showMessageCommand = TCommand<String>()
 
-    open fun destroy() {
-        subscriptions.forEach { it.dispose() }
-        subscriptions.clear()
-    }
-
     open fun back() = closeCommand.call()
 
-    open fun start() {}
+    protected fun getString(@StringRes resId: Int, vararg formatArgs: Any): String =
+        context.getString(resId, *formatArgs)
 
-    open fun stop() {
-        subscriptionsWhileVisible.forEach { it.dispose() }
-        subscriptionsWhileVisible.clear()
-    }
+    protected fun getColor(@ColorRes resId: Int): Int = ContextCompat.getColor(context, resId)
 
-    protected fun processError(
+    protected fun processException(
         tag: String = "SpaceStickApp",
         error: Throwable,
         display: Boolean = true
@@ -43,6 +44,4 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     }
 
     protected fun showToast(message: String) = showMessageCommand.call(message)
-
-    protected fun Disposable.addToSubscriptions() { subscriptions.add(this) }
 }

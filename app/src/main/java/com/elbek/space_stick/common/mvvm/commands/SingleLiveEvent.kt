@@ -1,21 +1,43 @@
 package com.elbek.space_stick.common.mvvm.commands
 
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import java.util.concurrent.atomic.AtomicBoolean
 
 typealias TCommand<T> = SingleLiveEvent<T>
 
-class SingleLiveEvent<T> : (T) -> Unit {
+class SingleLiveEvent<T> : MutableLiveData<T>() {
 
-    private val liveData = SingleMutableLiveData<T>()
-
-    fun observe(owner: LifecycleOwner, observer: Observer<in T>) = liveData.observe(owner, observer)
-
-    override fun invoke(arg: T) = call(arg)
+    private val TAG = "SingleLiveEvent"
+    private val isPending = AtomicBoolean(false)
 
     @MainThread
-    fun call(value: T) {
-        liveData.value = value
+    override fun observe(owner: LifecycleOwner, observer: Observer<in T>) {
+        if (hasActiveObservers()) {
+            Log.w(TAG, "Multiple observers registered but only one will be notified of changes.")
+
+        }
+
+        super.observe(owner, Observer {
+            if (isPending.compareAndSet(true, false)) observer.onChanged(it)
+        })
+    }
+
+    @MainThread
+    override fun setValue(t: T?) {
+        isPending.set(true)
+        super.setValue(t)
+    }
+
+    @MainThread
+    fun call() {
+        value = null
+    }
+
+    fun call(t: T) {
+        value = t
     }
 }
