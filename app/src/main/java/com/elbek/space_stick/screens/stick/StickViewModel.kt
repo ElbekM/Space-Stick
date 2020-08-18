@@ -51,7 +51,8 @@ class StickViewModel(
     fun onPreviousButtonClicked() {
         launch {
             try {
-                apiService.setPattern(patternPosition - 1)
+                patternPosition -= 1
+                apiService.setPattern(patternPosition)
             } catch (exception: Exception) {
                 processException(exception) {
                     onPreviousButtonClicked()
@@ -67,7 +68,8 @@ class StickViewModel(
     fun onForwardButtonClicked() {
         launch {
             try {
-                apiService.setPattern(patternPosition + 1)
+                patternPosition += 1
+                apiService.setPattern(patternPosition)
             } catch (exception: Exception) {
                 processException(exception) {
                     onForwardButtonClicked()
@@ -79,6 +81,7 @@ class StickViewModel(
     fun onItemClicked(position: Int) {
         launch {
             try {
+                patternPosition = position
                 apiService.setPattern(position)
             } catch (exception: Exception) {
                 processException(exception) {
