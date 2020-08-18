@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.Command
+import com.elbek.space_stick.common.mvvm.commands.TCommand
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -18,7 +19,7 @@ class MainViewModel(
     application: Application
 ) : BaseViewModel(application) {
 
-    val launchStickScreenCommand = Command()
+    val launchStickScreenCommand = TCommand<String>()
     val wifiSsid = MutableLiveData<String>()
 
     fun init(activity: FragmentActivity) {
@@ -39,7 +40,7 @@ class MainViewModel(
         launch {
             try {
                 apiService.checkConnection()
-                launchStickScreenCommand.call()
+                launchStickScreenCommand.postValue(wifiSsid.value)
                 withContext(Dispatchers.Main) {
                     showToast("SUCCESS")
                 }
