@@ -20,13 +20,9 @@ class PatternAdapter : BaseAdapter() {
         return view
     }
 
-    override fun getItem(position: Int): Any {
-        return items!![position]
-    }
+    override fun getItem(position: Int): Any = items!![position]
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getCount(): Int = items?.size ?: 0
 }

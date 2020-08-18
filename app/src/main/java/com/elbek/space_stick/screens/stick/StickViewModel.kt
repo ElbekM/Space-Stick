@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
+import java.text.FieldPosition
 
 class StickViewModel(
     private val apiService: StickService,
@@ -17,6 +18,31 @@ class StickViewModel(
         wifiName.value = wifiSsid
 
         fillPatterns()
+    }
+
+    fun onItemClicked(position: Int) {
+
+    }
+
+    fun onPreviousButtonClicked() {
+
+    }
+
+    fun onPlayPauseButtonClicked() {
+
+    }
+
+    fun onForwardButtonClicked() {
+
+    }
+
+    fun brightnessSeekBarChanged(position: Int) {
+
+    }
+
+
+    fun speedSeekBarChanged(position: Int) {
+
     }
 
     private fun fillPatterns() {
