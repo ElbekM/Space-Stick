@@ -4,12 +4,15 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
-import java.text.FieldPosition
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class StickViewModel(
     private val apiService: StickService,
     application: Application
 ) : BaseViewModel(application) {
+
+    private var patternPosition = 0
 
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
@@ -20,12 +23,41 @@ class StickViewModel(
         fillPatterns()
     }
 
-    fun onItemClicked(position: Int) {
+    fun brightnessSeekBarChanged(position: Int) {
+        launch {
+            try {
+                apiService.setBrightness(position)
+            } catch (exception: Exception) {
+                processException(exception) {
+                    brightnessSeekBarChanged(position)
+                }
+            }
+        }
+    }
 
+
+    fun speedSeekBarChanged(position: Int) {
+        launch {
+            try {
+                apiService.setSpeed(position)
+            } catch (exception: Exception) {
+                processException(exception) {
+                    speedSeekBarChanged(position)
+                }
+            }
+        }
     }
 
     fun onPreviousButtonClicked() {
-
+        launch {
+            try {
+                apiService.setPattern(patternPosition - 1)
+            } catch (exception: Exception) {
+                processException(exception) {
+                    onPreviousButtonClicked()
+                }
+            }
+        }
     }
 
     fun onPlayPauseButtonClicked() {
@@ -33,16 +65,27 @@ class StickViewModel(
     }
 
     fun onForwardButtonClicked() {
-
+        launch {
+            try {
+                apiService.setPattern(patternPosition + 1)
+            } catch (exception: Exception) {
+                processException(exception) {
+                    onForwardButtonClicked()
+                }
+            }
+        }
     }
 
-    fun brightnessSeekBarChanged(position: Int) {
-
-    }
-
-
-    fun speedSeekBarChanged(position: Int) {
-
+    fun onItemClicked(position: Int) {
+        launch {
+            try {
+                apiService.setPattern(position)
+            } catch (exception: Exception) {
+                processException(exception) {
+                    onItemClicked(position)
+                }
+            }
+        }
     }
 
     private fun fillPatterns() {
