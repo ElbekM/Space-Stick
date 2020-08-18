@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -75,12 +74,7 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
     }
 
     protected open fun bindViewModel() {
-
         viewModel.closeCommand.observe { close() }
-
-        viewModel.showMessageCommand.observe {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-        }
     }
 
     protected open fun close() = dismissAllowingStateLoss()
