@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
+import kotlinx.android.synthetic.main.fragment_stick.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StickFragment : BaseDialogFragment<StickViewModel>() {
@@ -23,16 +25,33 @@ class StickFragment : BaseDialogFragment<StickViewModel>() {
         initViews()
         bindViewModel()
         viewModel.init(
-            requireArguments().getString(wifiNameKey)
+            requireArguments().getString(wifiNameKey, "")
         )
     }
 
     override fun bindViewModel() {
+        super.bindViewModel()
 
+        viewModel.wifiName.observe {
+            it?.let {
+                wifiNameTextView.text = it
+            }
+        }
+
+        viewModel.patternsList.observe {
+            it.let { patterns ->
+                val adapter = PatternAdapter()
+                stickPatternsGridView.adapter = adapter
+                adapter.items = patterns
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 
     private fun initViews() {
+        stickPatternsGridView.setOnItemClickListener { _, _, i, l ->
 
+        }
     }
 
     companion object {

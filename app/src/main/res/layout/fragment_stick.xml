@@ -117,12 +117,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/stickPlayerLinearLayout"
         android:layout_marginTop="30dp"
-        android:gravity="center"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
         android:columnWidth="100dp"
+        android:stretchMode="columnWidth"
         android:numColumns="auto_fit"
         android:verticalSpacing="5dp"
-        android:horizontalSpacing="4dp"
-        android:stretchMode="spacingWidthUniform"
+        android:horizontalSpacing="5dp"
         tools:listitem="@layout/item_stick_pattern"/>
 
 </RelativeLayout>
