@@ -1,13 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.stick.StickFragment">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/stickInfoRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="56dp">
 
-</FrameLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/spaceStickImageView"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:padding="5dp"
+            android:src="@drawable/lamp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
+
+        <TextView
+            android:id="@+id/wifiNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/spaceStickImageView"
+            android:layout_marginStart="15dp"
+            android:layout_centerVertical="true"
+            android:textSize="24sp"
+            tools:text="SpaceStickWiFi"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_below="@+id/stickInfoRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-25dp"
+        android:layout_marginStart="26dp"
+        android:textSize="16sp"
+        android:text="Brightness"/>
+
+    <SeekBar
+        android:id="@+id/brightnessSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stickInfoRelativeLayout"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:max="100"
+        android:progress="0"/>
+
+    <TextView
+        android:layout_below="@+id/brightnessSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="26dp"
+        android:textSize="16sp"
+        android:text="Speed"/>
+
+    <SeekBar
+        android:id="@+id/speedSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/brightnessSeekBar"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:max="100"
+        android:progress="0"/>
+
+    <LinearLayout
+        android:id="@+id/stickPlayerLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_below="@+id/speedSeekBar">
+
+        <ImageView
+            android:id="@+id/previousImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/arrow_back"
+            tools:ignore="ContentDescription"/>
+
+        <ImageView
+            android:id="@+id/playPauseImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/play"
+            tools:ignore="ContentDescription"/>
+
+        <ImageView
+            android:id="@+id/forwardImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/arrow_forward"
+            tools:ignore="ContentDescription"/>
+
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/stickPatternsGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/stickPlayerLinearLayout"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="4dp"
+        android:stretchMode="spacingWidthUniform"
+        tools:listitem="@layout/item_stick_pattern"/>
+
+</RelativeLayout>

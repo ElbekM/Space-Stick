@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
@@ -31,9 +30,12 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
 
     override fun bindViewModel() {
         viewModel.launchStickScreenCommand.observe {
-            StickFragment
-                .newInstance()
-                .showAllowingStateLoss(childFragmentManager)
+            it?.let { wifiSsid ->
+                StickFragment
+                    .newInstance(wifiSsid)
+                    .showAllowingStateLoss(childFragmentManager)
+            }
+
         }
 
         viewModel.wifiSsid.observe {

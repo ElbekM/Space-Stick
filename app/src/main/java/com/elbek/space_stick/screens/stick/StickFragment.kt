@@ -22,7 +22,9 @@ class StickFragment : BaseDialogFragment<StickViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         bindViewModel()
-        viewModel.init()
+        viewModel.init(
+            requireArguments().getString(wifiNameKey)
+        )
     }
 
     override fun bindViewModel() {
@@ -34,6 +36,13 @@ class StickFragment : BaseDialogFragment<StickViewModel>() {
     }
 
     companion object {
-        fun newInstance() = StickFragment()
+        val wifiNameKey: String = ::wifiNameKey.name
+
+        fun newInstance(wifiSsid: String) =
+            StickFragment().apply {
+                arguments = Bundle().apply {
+                    putString(wifiNameKey, wifiSsid)
+                }
+            }
     }
 }

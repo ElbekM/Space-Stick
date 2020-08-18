@@ -9,7 +9,7 @@ class StickViewModel(
     application: Application
 ) : BaseViewModel(application) {
 
-    fun init() {
+    fun init(string: String?) {
 
     }
 }
