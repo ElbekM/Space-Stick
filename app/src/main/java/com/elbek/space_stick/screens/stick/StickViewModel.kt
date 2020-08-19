@@ -1,9 +1,11 @@
 package com.elbek.space_stick.screens.stick
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
+import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -20,6 +22,7 @@ class StickViewModel(
     fun init(wifiSsid: String) {
         wifiName.value = wifiSsid
 
+        saveWifiNameToSharedPrefs(wifiSsid)
         fillPatterns()
     }
 
@@ -111,6 +114,11 @@ class StickViewModel(
             add(Pattern("blendwave"))
         }
         patternsList.postValue(patterns)
+    }
+
+    private fun saveWifiNameToSharedPrefs(wifiName: String) {
+        val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+        preferences.edit().putString(Constants.APP_PREFERENCES_WIFI, wifiName).apply()
     }
 
     class Pattern(

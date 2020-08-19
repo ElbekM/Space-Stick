@@ -9,8 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
-import com.elbek.space_stick.common.mvvm.commands.Command
-import com.elbek.space_stick.common.mvvm.commands.TCommand
+import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.*
 import java.lang.Exception
 
@@ -19,7 +18,7 @@ class MainViewModel(
     application: Application
 ) : BaseViewModel(application) {
 
-    val launchStickScreenCommand = TCommand<String>()
+    val launchStickScreenCommand = MutableLiveData<String>()
     val wifiSsid = MutableLiveData<String>()
 
     fun init(activity: FragmentActivity) {
@@ -34,6 +33,8 @@ class MainViewModel(
                 wifiSsid.value = wifiInfo.ssid
             }
         }
+
+        checkSharedPref()
     }
 
     fun onCheckConnectionClicked() {
@@ -49,6 +50,15 @@ class MainViewModel(
                     onCheckConnectionClicked()
                 }
             }
+        }
+    }
+
+    private fun checkSharedPref() {
+        val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+        if (preferences.contains(Constants.APP_PREFERENCES_WIFI)) {
+            val wifiName = preferences.getString(Constants.APP_PREFERENCES_WIFI, "")
+            if (wifiName == wifiSsid.value)
+                launchStickScreenCommand.postValue(wifiName)
         }
     }
 }

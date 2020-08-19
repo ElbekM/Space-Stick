@@ -3,7 +3,7 @@ package com.elbek.space_stick
 import android.app.Application
 import android.content.Context
 
-class MainApplication : Application() {
+class SpaceStickApplication : Application() {
 
     init {
         instance = this
@@ -17,7 +17,7 @@ class MainApplication : Application() {
 
     companion object {
 
-        private var instance: MainApplication? = null
+        private var instance: SpaceStickApplication? = null
 
         fun applicationContext(): Context {
             return instance!!.applicationContext
