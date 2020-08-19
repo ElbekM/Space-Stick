@@ -13,10 +13,8 @@ import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.*
 import java.lang.Exception
 
-class MainViewModel(
-    private val apiService: StickService,
-    application: Application
-) : BaseViewModel(application) {
+class MainViewModel(private val apiService: StickService, application: Application) :
+    BaseViewModel(application) {
 
     val launchStickScreenCommand = MutableLiveData<String>()
     val wifiSsid = MutableLiveData<String>()

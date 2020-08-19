@@ -18,14 +18,16 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
+import com.elbek.space_stick.common.snackbar.Snackbar
 
 abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel : BaseViewModel {
+
     private val originalScreenOrientationKey: String = ::originalScreenOrientationKey.name
+    private val snackbar = Snackbar()
 
-    protected open var customTheme: Int = R.style.AppTheme
-
-    protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     protected abstract val viewModel: TViewModel
+    protected open var customTheme: Int = R.style.AppTheme
+    protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +76,21 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
     }
 
     protected open fun bindViewModel() {
-        viewModel.closeCommand.observe { close() }
+        with(viewModel) {
+            closeCommand.observe { close() }
+
+            showSnackBarCommand.observe {
+                it?.let {
+                    snackbar.showMessage(requireView(), requireContext(), it)
+                }
+            }
+
+            showSnackBarWithActionCommand.observe {
+                it?.let { (message, action) ->
+                    snackbar.showMessageWithAction(requireView(), requireContext(), message, action)
+                }
+            }
+        }
     }
 
     protected open fun close() = dismissAllowingStateLoss()
