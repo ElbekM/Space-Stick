@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.SeekBar
-import android.widget.Toast
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
+import com.elbek.space_stick.screens.patternSettings.RgbSettingsFragment
 import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
 import kotlinx.android.synthetic.main.fragment_stick.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,6 +48,12 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
                 adapter.items = patterns
                 adapter.notifyDataSetChanged()
             }
+        }
+
+        viewModel.launchRgbSettingsScreen.observe {
+            RgbSettingsFragment
+                .newInstance()
+                .showAllowingStateLoss(childFragmentManager)
         }
     }
 

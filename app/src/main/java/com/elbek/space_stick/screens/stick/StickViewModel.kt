@@ -5,19 +5,19 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
+import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class StickViewModel(
-    private val apiService: StickService,
-    application: Application
-) : BaseViewModel(application) {
+class StickViewModel(private val apiService: StickService, application: Application) :
+    BaseViewModel(application) {
 
     private var patternPosition = 0
 
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
+    val launchRgbSettingsScreen = LiveEvent()
 
     fun init(wifiSsid: String) {
         wifiName.value = wifiSsid
@@ -95,7 +95,9 @@ class StickViewModel(
     }
 
     fun onItemLongClicked(position: Int) {
-
+        if (position == 0) {
+            launchRgbSettingsScreen.call()
+        }
     }
 
     private fun fillPatterns() {
