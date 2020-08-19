@@ -23,17 +23,7 @@ class MainViewModel(
 
     fun init(activity: FragmentActivity) {
 
-        val connManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-        if (networkInfo != null && networkInfo.isConnected) {
-            val wifiManager = activity.applicationContext
-                .getSystemService(Context.WIFI_SERVICE) as WifiManager
-            val wifiInfo = wifiManager.connectionInfo
-            if (wifiInfo.supplicantState == SupplicantState.COMPLETED) {
-                wifiSsid.value = wifiInfo.ssid
-            }
-        }
-
+        getWifiName(activity)
         checkSharedPref()
     }
 
@@ -53,7 +43,22 @@ class MainViewModel(
         }
     }
 
+    private fun getWifiName(activity: FragmentActivity) {
+        //TODO: add permission to location
+        val connManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
+        if (networkInfo != null && networkInfo.isConnected) {
+            val wifiManager = activity.applicationContext
+                .getSystemService(Context.WIFI_SERVICE) as WifiManager
+            val wifiInfo = wifiManager.connectionInfo
+            if (wifiInfo.supplicantState == SupplicantState.COMPLETED) {
+                wifiSsid.value = wifiInfo.ssid
+            }
+        }
+    }
+
     private fun checkSharedPref() {
+        //TODO: not wifi name, use some wifi uuid
         val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
         if (preferences.contains(Constants.APP_PREFERENCES_WIFI)) {
             val wifiName = preferences.getString(Constants.APP_PREFERENCES_WIFI, "")
@@ -62,4 +67,3 @@ class MainViewModel(
         }
     }
 }
-
