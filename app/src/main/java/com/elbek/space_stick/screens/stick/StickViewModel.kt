@@ -94,6 +94,10 @@ class StickViewModel(
         }
     }
 
+    fun onItemLongClicked(position: Int) {
+
+    }
+
     private fun fillPatterns() {
         val patterns = mutableListOf<Pattern>()
         patterns.apply {

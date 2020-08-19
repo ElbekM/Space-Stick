@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.SeekBar
+import android.widget.Toast
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
@@ -59,6 +61,10 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
 
         stickPatternsGridView.setOnItemClickListener { _, _, position, _ ->
             viewModel.onItemClicked(position)
+        }
+        stickPatternsGridView.setOnItemLongClickListener { _, _, position, _ ->
+            viewModel.onItemLongClicked(position)
+            return@setOnItemLongClickListener true
         }
     }
 
