@@ -12,4 +12,18 @@
         android:textSize="24sp"
         android:text="Under development" />
 
+    <com.github.dhaval2404.colorpicker.ColorPickerView
+        android:id="@+id/colorPickerView"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/colorPickerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Color Picker"/>
+
 </RelativeLayout>

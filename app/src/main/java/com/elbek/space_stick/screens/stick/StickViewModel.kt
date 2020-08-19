@@ -8,9 +8,7 @@ import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class StickViewModel(private val apiService: StickService, application: Application) :
