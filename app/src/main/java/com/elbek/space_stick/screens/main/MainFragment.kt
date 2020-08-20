@@ -1,6 +1,9 @@
 package com.elbek.space_stick.screens.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,17 +28,29 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         bindViewModel()
-        viewModel.init(requireActivity())
+        viewModel.init()
     }
 
     override fun bindViewModel() {
+        super.bindViewModel()
+
         viewModel.launchStickScreenCommand.observe {
             it?.let { wifiSsid ->
                 StickFragment
                     .newInstance(wifiSsid)
                     .showAllowingStateLoss(childFragmentManager)
             }
+        }
 
+        viewModel.launchAppSettingsCommand.observe {
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.fromParts("package", requireActivity().packageName, null)
+                startActivity(this)
+            }
+        }
+
+        viewModel.showRequestDialogCommand.observe {
+            viewModel.showDialog(requireContext())
         }
 
         viewModel.wifiSsid.observe {

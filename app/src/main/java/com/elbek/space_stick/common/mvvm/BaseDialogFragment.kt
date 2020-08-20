@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -75,9 +76,29 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
         })
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        viewModel.onPermissionsResult(requestCode)
+    }
+
     protected open fun bindViewModel() {
         with(viewModel) {
             closeCommand.observe { close() }
+
+            requestPermissionsCommand.observe {
+                it?.let { (permissions, requestCode) ->
+                    requestPermissions(permissions.toTypedArray(), requestCode)
+                }
+            }
+
+            showPermissionDialogDeniedByUserCommand.observe {
+                it?.let { (permission, requestCode) ->
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permission)) {
+                        viewModel.permissionDeniedByUser(requestCode)
+                    }
+                }
+            }
 
             showSnackBarCommand.observe {
                 it?.let {

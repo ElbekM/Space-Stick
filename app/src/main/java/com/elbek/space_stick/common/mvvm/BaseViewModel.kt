@@ -2,6 +2,7 @@ package com.elbek.space_stick.common.mvvm
 
 import android.app.Application
 import android.content.Context
+import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
@@ -25,8 +26,20 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     val closeCommand = Command()
     val showSnackBarWithActionCommand = TCommand<Pair<String, (() -> Unit)>>()
     val showSnackBarCommand = TCommand<String>()
+    val requestPermissionsCommand = TCommand<Pair<List<String>, Int>>()
+    val showPermissionDialogDeniedByUserCommand = TCommand<Pair<String, Int>>()
 
     open fun back() = closeCommand.call()
+    open fun onPermissionsResult(requestCode: Int) { }
+    open fun permissionDeniedByUser(requestCode: Int) { }
+
+    protected fun isPermissionsGranted(vararg permissions: String): Boolean =
+        permissions.all {
+            ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+        }
+
+    protected fun requestPermissions(permissions: List<String>, requestCode: Int)
+            = requestPermissionsCommand.call(Pair(permissions, requestCode))
 
     protected fun getString(@StringRes resId: Int, vararg formatArgs: Any): String =
         context.getString(resId, *formatArgs)
