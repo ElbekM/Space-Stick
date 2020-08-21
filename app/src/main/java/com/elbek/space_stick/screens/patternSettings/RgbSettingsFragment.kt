@@ -4,9 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
+import com.skydoves.colorpickerview.listeners.ColorListener
+import kotlinx.android.synthetic.main.fragment_rgb_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
 
@@ -30,7 +35,9 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
     }
 
     private fun initViews() {
-
+        colorPickerView.setColorListener(ColorEnvelopeListener { envelope, fromUser ->
+            envelope.argb
+        })
     }
 
     companion object {
