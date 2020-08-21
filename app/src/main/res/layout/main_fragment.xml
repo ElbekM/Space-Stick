@@ -24,6 +24,7 @@
         android:layout_toStartOf="@+id/wifiNameTextView"
         android:layout_marginEnd="5dp"
         android:src="@drawable/wifi"
+        app:tint="@color/black"
         tools:ignore="ContentDescription"/>
 
     <ImageView
@@ -35,6 +36,7 @@
         android:layout_marginEnd="5dp"
         android:src="@drawable/unknown_wifi"
         android:visibility="gone"
+        app:tint="@color/black"
         tools:ignore="ContentDescription"/>
 
     <ImageView
@@ -46,6 +48,7 @@
         android:layout_marginEnd="5dp"
         android:src="@drawable/wifi_off"
         android:visibility="gone"
+        app:tint="@color/black"
         tools:ignore="ContentDescription"/>
 
     <TextView

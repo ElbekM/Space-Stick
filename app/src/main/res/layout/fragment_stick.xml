@@ -93,15 +93,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/arrow_back"
+            app:tint="@color/black"
             tools:ignore="ContentDescription"/>
 
         <ImageView
             android:id="@+id/playPauseButtonImageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/play"
+            app:tint="@color/black"
             tools:ignore="ContentDescription"/>
 
         <ImageView
@@ -109,7 +113,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/arrow_forward"
+            app:tint="@color/black"
             tools:ignore="ContentDescription"/>
 
     </LinearLayout>
