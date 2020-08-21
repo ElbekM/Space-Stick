@@ -14,6 +14,7 @@ import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import com.elbek.space_stick.common.utils.Utils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -21,6 +22,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     BaseViewModel(application) {
 
     val wifiSsid = MutableLiveData<String>()
+    val connectionState = MutableLiveData<Boolean>()
     val launchStickScreenCommand = MutableLiveData<String>()
     val showRequestDialogCommand = LiveEvent()
     val launchAppSettingsCommand = LiveEvent()
@@ -39,7 +41,9 @@ class MainViewModel(private val apiService: StickService, application: Applicati
 
         launch {
             try {
+                connectionState.postValue(true)
                 apiService.checkConnection()
+                delay(1000)
                 launchStickScreenCommand.postValue(wifiSsid.value)
                 withContext(Dispatchers.Main) {
                     showToast("SUCCESS")
@@ -48,6 +52,8 @@ class MainViewModel(private val apiService: StickService, application: Applicati
                 processException(exception) {
                     onCheckConnectionClicked()
                 }
+            } finally {
+                connectionState.postValue(false)
             }
         }
     }

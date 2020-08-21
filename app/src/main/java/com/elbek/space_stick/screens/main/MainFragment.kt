@@ -54,6 +54,16 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
         viewModel.wifiSsid.observe {
             wifiNameTextView.text = it
         }
+
+        viewModel.connectionState.observe {
+            it?.let { connection ->
+                if (connection) {
+                    checkConnectionButton.text = "Connection..."
+                } else {
+                    checkConnectionButton.text = "Connect"
+                }
+            }
+        }
     }
 
     private fun initViews() {

@@ -32,6 +32,7 @@
             android:layout_toEndOf="@+id/spaceStickImageView"
             android:layout_marginStart="15dp"
             android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="24sp"
             tools:text="SpaceStickWiFi"/>
 
@@ -44,6 +45,7 @@
         android:layout_marginTop="-25dp"
         android:layout_marginStart="26dp"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:text="Brightness"/>
 
     <SeekBar
@@ -63,6 +65,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="26dp"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:text="Speed"/>
 
     <SeekBar
@@ -90,15 +93,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/arrow_back"
+            app:tint="@color/black"
             tools:ignore="ContentDescription"/>
 
         <ImageView
             android:id="@+id/playPauseButtonImageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/play"
+            app:tint="@color/black"
             tools:ignore="ContentDescription"/>
 
         <ImageView
@@ -106,7 +113,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:src="@drawable/arrow_forward"
+            app:tint="@color/black"
             tools:ignore="ContentDescription"/>
 
     </LinearLayout>

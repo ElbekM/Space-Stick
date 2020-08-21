@@ -2,7 +2,9 @@ package com.elbek.space_stick.screens.stick
 
 import android.app.Application
 import android.content.Context
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.MutableLiveData
+import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
@@ -17,7 +19,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     private var patternPosition = 0
     private var patternsCount = 0
     //TODO: onPause observe and change icon
-    val isOnPause = MutableLiveData<Boolean>(false)
+    val onPause = MutableLiveData<Boolean>(false)
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
     val launchRgbSettingsScreen = LiveEvent()
@@ -44,8 +46,8 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onPlayPauseButtonClicked() {
-        setPattern(if (isOnPause.value!!) patternPosition else 0)
-        isOnPause.value = !isOnPause.value!!
+        setPattern(if (onPause.value!!) patternPosition else 0)
+        onPause.value = !onPause.value!!
     }
 
     fun onForwardButtonClicked() {
@@ -110,21 +112,21 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     private fun fillPatterns() {
         val patterns = mutableListOf<Pattern>()
         patterns.apply {
-            add(Pattern("juggle"))
-            add(Pattern("sinelon"))
-            add(Pattern("confetti"))
-            add(Pattern("rainbowWithGlitter"))
-            add(Pattern("rainbow1"))
-            add(Pattern("rainbow2"))
-            add(Pattern("rainbow3"))
-            add(Pattern("rainbow4"))
-            add(Pattern("rainbow5"))
-            add(Pattern("rainbow6"))
-            add(Pattern("three_sin1"))
-            add(Pattern("three_sin2"))
-            add(Pattern("three_sin3"))
-            add(Pattern("three_sin4"))
-            add(Pattern("blendwave"))
+            add(Pattern("juggle", R.drawable.ic_pattern1))
+            add(Pattern("sinelon", R.drawable.ic_pattern2))
+            add(Pattern("confetti", R.drawable.ic_pattern3))
+            add(Pattern("rainbowWithGlitter", R.drawable.ic_pattern4))
+            add(Pattern("rainbow1", R.drawable.ic_pattern5))
+            add(Pattern("rainbow2", R.drawable.ic_pattern6))
+            add(Pattern("rainbow3", R.drawable.ic_pattern7))
+            add(Pattern("rainbow4", R.drawable.ic_pattern8))
+            add(Pattern("rainbow5", R.drawable.ic_pattern9))
+            add(Pattern("rainbow6", R.drawable.ic_pattern10))
+            add(Pattern("three_sin1", R.drawable.ic_pattern12))
+            add(Pattern("three_sin2", R.drawable.ic_pattern13))
+            add(Pattern("three_sin3", R.drawable.ic_pattern14))
+            add(Pattern("three_sin4", R.drawable.ic_pattern15))
+            add(Pattern("blendwave", R.drawable.ic_pattern14))
         }
         patternsCount = patterns.size
         patternsList.postValue(patterns)
@@ -138,6 +140,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     class Pattern(
-        val name: String
+        val name: String,
+        @DrawableRes val icon:  Int
     )
 }
