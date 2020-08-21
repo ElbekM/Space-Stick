@@ -5,6 +5,7 @@ import com.elbek.space_stick.api.ApiController
 import com.elbek.space_stick.api.ApiServiceProvider
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.screens.main.MainViewModel
+import com.elbek.space_stick.screens.patternSettings.RgbSettingsViewModel
 import com.elbek.space_stick.screens.stick.StickViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.experimental.dsl.viewModel
@@ -27,6 +28,7 @@ fun initDI(context: Context) {
 
             viewModel<MainViewModel>()
             viewModel<StickViewModel>()
+            viewModel<RgbSettingsViewModel>()
         })
     }
 }

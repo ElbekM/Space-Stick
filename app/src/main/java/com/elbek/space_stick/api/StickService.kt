@@ -9,4 +9,6 @@ class StickService(private val apiController: ApiController) {
     suspend fun setSpeed(speed: Int) = apiController.setSpeed(speed)
 
     suspend fun setBrightness(brightness: Int) = apiController.setBrightness(brightness)
+
+    suspend fun setColor(r: Int, g: Int, b: Int) = apiController.setPatternColor(r, g, b)
 }

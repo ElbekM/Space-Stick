@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 class ApiServiceProvider {
     private val baseUrl = "http://192.168.4.1/"
-    private val timeout = 5L
+    private val timeout = 10L
 
     val spaceStickRetrofit: Retrofit by lazy {
         Retrofit.Builder()

@@ -36,7 +36,7 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
 
         viewModel.launchStickScreenCommand.observe {
             StickFragment
-                .newInstance(it)
+                .newInstance(it!!)
                 .showAllowingStateLoss(childFragmentManager)
         }
 

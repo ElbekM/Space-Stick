@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
+import com.elbek.space_stick.screens.patternSettings.RgbSettingsFragment
 import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
 import kotlinx.android.synthetic.main.fragment_stick.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +28,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         initViews()
         bindViewModel()
         viewModel.init(
-            requireArguments().getString(wifiNameKey)
+            requireArguments().getString(wifiNameKey, "")
         )
     }
     
@@ -57,6 +59,12 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
                 adapter.items = patterns
                 adapter.notifyDataSetChanged()
             }
+        }
+
+        viewModel.launchRgbSettingsScreen.observe {
+            RgbSettingsFragment
+                .newInstance()
+                .showAllowingStateLoss(childFragmentManager)
         }
     }
 
@@ -89,7 +97,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     companion object {
         val wifiNameKey: String = ::wifiNameKey.name
 
-        fun newInstance(wifiSsid: String?) =
+        fun newInstance(wifiSsid: String) =
             StickFragment().apply {
                 arguments = Bundle().apply {
                     putString(wifiNameKey, wifiSsid)

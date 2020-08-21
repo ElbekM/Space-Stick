@@ -8,12 +8,13 @@ import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
+import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class StickViewModel(private val apiService: StickService, application: Application)
-    : BaseViewModel(application) {
+class StickViewModel(private val apiService: StickService, application: Application) :
+    BaseViewModel(application) {
 
     private var patternPosition = 0
     private var patternsCount = 0
@@ -21,12 +22,12 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     val onPause = MutableLiveData<Boolean>(false)
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
+    val launchRgbSettingsScreen = LiveEvent()
 
-    fun init(wifiSsid: String?) {
-        val wifiName = wifiSsid ?: "SpaceStickWiFi"
-        this.wifiName.value = wifiName
+    fun init(wifiSsid: String) {
+        this.wifiName.value = wifiSsid
 
-        saveWifiNameToSharedPrefs(wifiName)
+        saveWifiNameToSharedPrefs(wifiSsid)
         setDefaultParameters()
         fillPatterns()
     }
@@ -60,7 +61,10 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onItemLongClicked(position: Int) {
-
+        if (position == 0) {
+            onItemClicked(0)
+            launchRgbSettingsScreen.call()
+        }
     }
 
     private fun setDefaultParameters() {
