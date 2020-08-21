@@ -28,7 +28,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         initViews()
         bindViewModel()
         viewModel.init(
-            requireArguments().getString(wifiNameKey, "")
+            requireArguments().getString(wifiNameKey)
         )
     }
 
@@ -86,7 +86,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     companion object {
         val wifiNameKey: String = ::wifiNameKey.name
 
-        fun newInstance(wifiSsid: String) =
+        fun newInstance(wifiSsid: String?) =
             StickFragment().apply {
                 arguments = Bundle().apply {
                     putString(wifiNameKey, wifiSsid)

@@ -12,20 +12,23 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
+import com.elbek.space_stick.common.snackbar.Snackbar
 
 abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel : BaseViewModel {
+
     private val originalScreenOrientationKey: String = ::originalScreenOrientationKey.name
+    private val snackbar = Snackbar()
 
-    protected open var customTheme: Int = R.style.AppTheme
-
-    protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     protected abstract val viewModel: TViewModel
+    protected open var customTheme: Int = R.style.AppTheme
+    protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,8 +76,42 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
         })
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        viewModel.onPermissionsResult(requestCode)
+    }
+
     protected open fun bindViewModel() {
-        viewModel.closeCommand.observe { close() }
+        with(viewModel) {
+            closeCommand.observe { close() }
+
+            requestPermissionsCommand.observe {
+                it?.let { (permissions, requestCode) ->
+                    requestPermissions(permissions.toTypedArray(), requestCode)
+                }
+            }
+
+            showPermissionDialogDeniedByUserCommand.observe {
+                it?.let { (permission, requestCode) ->
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permission)) {
+                        viewModel.permissionDeniedByUser(requestCode)
+                    }
+                }
+            }
+
+            showSnackBarCommand.observe {
+                it?.let {
+                    snackbar.showMessage(requireView(), requireContext(), it)
+                }
+            }
+
+            showSnackBarWithActionCommand.observe {
+                it?.let { (message, action) ->
+                    snackbar.showMessageWithAction(requireView(), requireContext(), message, action)
+                }
+            }
+        }
     }
 
     protected open fun close() = dismissAllowingStateLoss()

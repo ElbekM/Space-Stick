@@ -1,33 +1,42 @@
 package com.elbek.space_stick.screens.main
 
+import android.Manifest
+import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
+import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
-import kotlinx.coroutines.*
-import java.lang.Exception
+import com.elbek.space_stick.common.utils.Utils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainViewModel(
-    private val apiService: StickService,
-    application: Application
-) : BaseViewModel(application) {
+class MainViewModel(private val apiService: StickService, application: Application) :
+    BaseViewModel(application) {
 
-    val launchStickScreenCommand = MutableLiveData<String>()
     val wifiSsid = MutableLiveData<String>()
+    val launchStickScreenCommand = MutableLiveData<String>()
+    val showRequestDialogCommand = LiveEvent()
+    val launchAppSettingsCommand = LiveEvent()
 
-    fun init(activity: FragmentActivity) {
-
-        getWifiName(activity)
+    fun init() {
+        //TODO: check wifi connection
+        checkLocationPermission()
         checkSharedPref()
     }
 
     fun onCheckConnectionClicked() {
+        if (wifiSsid.value.isNullOrEmpty()) {
+            getWifiSsid()
+            return
+        }
+
         launch {
             try {
                 apiService.checkConnection()
@@ -43,22 +52,67 @@ class MainViewModel(
         }
     }
 
-    private fun getWifiName(activity: FragmentActivity) {
-        //TODO: add permission to location
-        val connManager = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun showDialog(context: Context) {
+        AlertDialog.Builder(context).apply {
+            setTitle("WARNING")
+            setMessage("To correct work app need location permission")
+            setPositiveButton("Go to settings") { _, _ ->
+                launchAppSettingsCommand.call()
+            }
+            setNegativeButton("Cancel") { dialog, _ ->
+                dialog.cancel()
+            }
+            create()
+            show()
+        }
+    }
+
+    override fun onPermissionsResult(requestCode: Int) {
+        super.onPermissionsResult(requestCode)
+
+        if (requestCode == Constants.LOCATION_REQUEST &&
+            isPermissionsGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            getWifiSsid()
+        } else {
+            showPermissionDialogDeniedByUserCommand.call(
+                Pair(Manifest.permission.ACCESS_FINE_LOCATION, requestCode)
+            )
+        }
+    }
+
+    override fun permissionDeniedByUser(requestCode: Int) {
+        showRequestDialogCommand.call()
+    }
+
+    private fun checkLocationPermission() {
+        if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.O) {
+            if (isPermissionsGranted(Manifest.permission.ACCESS_FINE_LOCATION))
+                getWifiSsid()
+            else
+                requestPermissions(listOf(Manifest.permission.ACCESS_FINE_LOCATION), Constants.LOCATION_REQUEST)
+        } else {
+            getWifiSsid()
+        }
+    }
+
+    private fun getWifiSsid() {
+        val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
         if (networkInfo != null && networkInfo.isConnected) {
-            val wifiManager = activity.applicationContext
+            val wifiManager = context.applicationContext
                 .getSystemService(Context.WIFI_SERVICE) as WifiManager
             val wifiInfo = wifiManager.connectionInfo
             if (wifiInfo.supplicantState == SupplicantState.COMPLETED) {
-                wifiSsid.value = wifiInfo.ssid
+                wifiSsid.value = Utils.validateWifiSsid(wifiInfo.ssid)
             }
+        } else {
+            //TODO: enable wifi dialog
         }
     }
 
     private fun checkSharedPref() {
-        //TODO: not wifi name, use some wifi uuid
+        //TODO: clear shared pref
+        //TODO: not wifi name, use some wifi uuid, fix case with default value
         val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
         if (preferences.contains(Constants.APP_PREFERENCES_WIFI)) {
             val wifiName = preferences.getString(Constants.APP_PREFERENCES_WIFI, "")

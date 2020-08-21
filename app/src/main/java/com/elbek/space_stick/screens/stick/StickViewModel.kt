@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
+import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
@@ -14,79 +15,92 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     BaseViewModel(application) {
 
     private var patternPosition = 0
-
+    private var patternsCount = 0
+    //TODO: onPause observe and change icon
+    val isOnPause = MutableLiveData<Boolean>(false)
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
     val launchRgbSettingsScreen = LiveEvent()
 
-    fun init(wifiSsid: String) {
-        wifiName.value = wifiSsid
+    fun init(wifiSsid: String?) {
+        val wifiName = wifiSsid ?: "SpaceStickWiFi"
+        this.wifiName.value = wifiName
 
-        saveWifiNameToSharedPrefs(wifiSsid)
+        saveWifiNameToSharedPrefs(wifiName)
+        setDefaultParameters()
         fillPatterns()
     }
 
     fun brightnessSeekBarChanged(position: Int) {
+        setBrightness(position)
+    }
+
+    fun speedSeekBarChanged(position: Int) {
+        setSpeed(position)
+    }
+
+    fun onPreviousButtonClicked() {
+        patternPosition = (patternPosition - 1).modularAdd(patternsCount)
+        setPattern(patternPosition)
+    }
+
+    fun onPlayPauseButtonClicked() {
+        setPattern(if (isOnPause.value!!) patternPosition else 0)
+        isOnPause.value = !isOnPause.value!!
+    }
+
+    fun onForwardButtonClicked() {
+        patternPosition = (patternPosition + 1).modularAdd(patternsCount)
+        setPattern(patternPosition)
+    }
+
+    fun onItemClicked(position: Int) {
+        patternPosition = position
+        setPattern(patternPosition)
+    }
+
+    fun onItemLongClicked(position: Int) {
+
+    }
+
+    private fun setDefaultParameters() {
+        patternPosition = 0
+        setPattern(patternPosition)
+        setBrightness(100)
+        setSpeed(10)
+    }
+
+    private fun setBrightness(position: Int) {
         launch {
             try {
                 apiService.setBrightness(position)
             } catch (exception: Exception) {
                 processException(exception) {
-                    brightnessSeekBarChanged(position)
+                    setBrightness(position)
                 }
             }
         }
     }
 
-
-    fun speedSeekBarChanged(position: Int) {
+    private fun setSpeed(position: Int) {
         launch {
             try {
                 apiService.setSpeed(position)
             } catch (exception: Exception) {
                 processException(exception) {
-                    speedSeekBarChanged(position)
+                    setSpeed(position)
                 }
             }
         }
     }
 
-    fun onPreviousButtonClicked() {
+    private fun setPattern(patternPosition: Int) {
         launch {
             try {
                 apiService.setPattern(patternPosition)
             } catch (exception: Exception) {
                 processException(exception) {
-                    onPreviousButtonClicked()
-                }
-            }
-        }
-    }
-
-    fun onPlayPauseButtonClicked() {
-
-    }
-
-    fun onForwardButtonClicked() {
-        launch {
-            try {
-                apiService.setPattern(patternPosition)
-            } catch (exception: Exception) {
-                processException(exception) {
-                    onForwardButtonClicked()
-                }
-            }
-        }
-    }
-
-    fun onItemClicked(position: Int) {
-        launch {
-            try {
-                patternPosition = position
-                apiService.setPattern(position)
-            } catch (exception: Exception) {
-                processException(exception) {
-                    onItemClicked(position)
+                    setPattern(patternPosition)
                 }
             }
         }
@@ -117,12 +131,15 @@ class StickViewModel(private val apiService: StickService, application: Applicat
             add(Pattern("three_sin4"))
             add(Pattern("blendwave"))
         }
+        patternsCount = patterns.size
         patternsList.postValue(patterns)
     }
 
     private fun saveWifiNameToSharedPrefs(wifiName: String) {
-        val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
-        preferences.edit().putString(Constants.APP_PREFERENCES_WIFI, wifiName).apply()
+        if (wifiName != Constants.DEFAULT_WIFI_NAME) {
+            val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+            preferences.edit().putString(Constants.APP_PREFERENCES_WIFI, wifiName).apply()
+        }
     }
 
     class Pattern(

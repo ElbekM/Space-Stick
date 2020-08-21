@@ -3,4 +3,18 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="color_background">#F9F9F9</color>
+    <color name="color_dark_gray">#445867</color>
+    <color name="disabled">#B5B5B5</color>
+
+    <color name="text_light_gray">#c2c2c2</color>
+    <color name="text_gray">#858585</color>
+    <color name="text_dark_gray">#445967</color>
+
+    <color name="snackbar_background">#202020</color>
+    <color name="error_text_color">#E10606</color>
+    <color name="warning_text_color">#F7BA00</color>
+    <color name="color_divider">#D8D8D8</color>
 </resources>
