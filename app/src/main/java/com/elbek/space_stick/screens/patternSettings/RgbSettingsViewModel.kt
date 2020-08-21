@@ -10,4 +10,12 @@ class RgbSettingsViewModel(private val apiService: StickService, application: Ap
     fun init() {
 
     }
+
+    fun onColorPickerSelected(rgb: IntArray) {
+
+    }
+
+    fun onChangeColorClicked() {
+
+    }
 }
