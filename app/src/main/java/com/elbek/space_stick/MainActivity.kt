@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
 import com.elbek.space_stick.screens.main.MainFragment
-import com.elbek.space_stick.screens.stick.StickFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchMainScreen() {
-        StickFragment
-            .newInstance("Wifi Name")
+        MainFragment
+            .newInstance()
             .showAllowingStateLoss(supportFragmentManager)
     }
 }

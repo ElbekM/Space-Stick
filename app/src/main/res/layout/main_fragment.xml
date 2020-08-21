@@ -18,8 +18,8 @@
 
     <ImageView
         android:id="@+id/wifi"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_below="@+id/spaceStickImageView"
         android:layout_toStartOf="@+id/wifiNameTextView"
         android:layout_marginEnd="5dp"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spaceStickImageView"
         android:layout_centerHorizontal="true"
-        android:textSize="32sp"
+        android:textSize="26sp"
         android:textColor="@color/colorAccent"
         tools:text="SpaceStickWifi"/>
 
