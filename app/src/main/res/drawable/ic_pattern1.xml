@@ -6,21 +6,19 @@
   <path
       android:pathData="M141.66,135.3l21.18,-115.53l92.62,73.09z"
       android:strokeWidth="6"
-      android:fillColor="#FFFFFF"
-      android:strokeColor="#000000"/>
+      android:strokeColor="#FFFFFF"/>
   <path
       android:pathData="M35.84,262.49l21.19,-115.53l92.61,73.08z"
       android:strokeWidth="6"
       android:fillColor="#FFFFFF"
-      android:strokeColor="#000000"/>
+      android:strokeColor="#FFFFFF"/>
   <path
       android:pathData="M82.48,208.1l21.18,-115.53l92.62,73.09z"
       android:strokeWidth="6"
-      android:fillColor="#FFFFFF"
-      android:strokeColor="#000000"/>
+      android:fillColor="#000000"
+      android:strokeColor="#FFFFFF"/>
   <path
       android:pathData="M105.5,182.96l21.18,-115.53l92.62,73.09z"
       android:strokeWidth="6"
-      android:fillColor="#FFFFFF"
-      android:strokeColor="#000000"/>
+      android:strokeColor="#FFFFFF"/>
 </vector>

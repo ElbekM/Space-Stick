@@ -16,7 +16,7 @@ class PatternAdapter : BaseAdapter() {
         val pattern = items!![position]
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_stick_pattern, null)
-        view.wifiNameTextView.text = pattern.name
+        view.patternIcon.setImageResource(pattern.icon)
         return view
     }
 

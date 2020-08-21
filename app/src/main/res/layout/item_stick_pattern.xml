@@ -14,14 +14,14 @@
         android:layout_width="96dp"
         android:layout_height="96dp">
 
-        <TextView
-            android:id="@+id/wifiNameTextView"
+        <ImageView
+            android:id="@+id/patternIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
-            android:textSize="12sp"
-            tools:text="SpaceStickWiFi"/>
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_pattern9"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 

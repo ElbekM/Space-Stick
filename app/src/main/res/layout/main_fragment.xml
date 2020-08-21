@@ -55,7 +55,7 @@
         android:layout_below="@+id/spaceStickImageView"
         android:layout_centerHorizontal="true"
         android:textSize="32sp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorAccent"
         tools:text="SpaceStickWifi"/>
 
     <com.google.android.material.button.MaterialButton
