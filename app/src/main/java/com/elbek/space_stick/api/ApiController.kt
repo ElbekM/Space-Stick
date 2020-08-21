@@ -22,4 +22,11 @@ interface ApiController {
     suspend fun setBrightness(
         @Query("b") brightness: Int
     )
+
+    @POST("api/mode/pattern/color")
+    suspend fun setPatternColor(
+        @Query("r") r: Int,
+        @Query("g") g: Int,
+        @Query("b") b: Int
+    )
 }
