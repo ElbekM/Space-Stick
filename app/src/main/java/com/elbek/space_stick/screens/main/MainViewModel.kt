@@ -111,6 +111,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     private fun checkSharedPref() {
+        //TODO: clear shared pref
         //TODO: not wifi name, use some wifi uuid, fix case with default value
         val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
         if (preferences.contains(Constants.APP_PREFERENCES_WIFI)) {

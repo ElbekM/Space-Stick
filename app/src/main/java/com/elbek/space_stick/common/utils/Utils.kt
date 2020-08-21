@@ -7,5 +7,5 @@ object Utils {
         if (wifiSsid.isEmpty() || wifiSsid == Constants.UNKNOWN_WIFI_SSID)
             Constants.DEFAULT_WIFI_NAME
         else
-            wifiSsid
+            wifiSsid.replace("\"","")
 }
