@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
-import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
@@ -55,7 +54,6 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     fun onPreviousButtonClicked() {
         launch {
             try {
-                patternPosition = (patternPosition - 1).modularAdd(patternsList.value!!.size)
                 apiService.setPattern(patternPosition)
             } catch (exception: Exception) {
                 processException(exception) {
@@ -72,7 +70,6 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     fun onForwardButtonClicked() {
         launch {
             try {
-                patternPosition = (patternPosition + 1).modularAdd(patternsList.value!!.size)
                 apiService.setPattern(patternPosition)
             } catch (exception: Exception) {
                 processException(exception) {
