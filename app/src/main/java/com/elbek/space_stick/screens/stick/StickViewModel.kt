@@ -18,7 +18,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     private var patternPosition = 0
     private var patternsCount = 0
     //TODO: onPause observe and change icon
-    val isOnPause = MutableLiveData<Boolean>(false)
+    val onPause = MutableLiveData<Boolean>(false)
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
 
@@ -45,8 +45,8 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onPlayPauseButtonClicked() {
-        setPattern(if (isOnPause.value!!) patternPosition else 0)
-        isOnPause.value = !isOnPause.value!!
+        setPattern(if (onPause.value!!) patternPosition else 0)
+        onPause.value = !onPause.value!!
     }
 
     fun onForwardButtonClicked() {

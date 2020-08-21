@@ -29,13 +29,24 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
             requireArguments().getString(wifiNameKey)
         )
     }
-
+    
     override fun bindViewModel() {
         super.bindViewModel()
 
         viewModel.wifiName.observe {
             it?.let {
                 wifiNameTextView.text = it
+            }
+        }
+
+        viewModel.onPause.observe {
+            it?.let { pause ->
+                playPauseButtonImageView.apply {
+                    if (pause)
+                        setImageResource(R.drawable.play)
+                    else
+                        setImageResource(R.drawable.pause)
+                }
             }
         }
 
