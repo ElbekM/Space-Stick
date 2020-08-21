@@ -10,7 +10,6 @@ import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.android.synthetic.main.fragment_rgb_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
 
     override val viewModel: RgbSettingsViewModel by viewModel()

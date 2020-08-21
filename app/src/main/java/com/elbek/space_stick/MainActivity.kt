@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchMainScreen() {
-        StickFragment
-            .newInstance("Wifi Name")
+        MainFragment
+            .newInstance()
             .showAllowingStateLoss(supportFragmentManager)
     }
 }

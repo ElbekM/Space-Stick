@@ -62,6 +62,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
 
     fun onItemLongClicked(position: Int) {
         if (position == 0) {
+            onItemClicked(0)
             launchRgbSettingsScreen.call()
         }
     }
