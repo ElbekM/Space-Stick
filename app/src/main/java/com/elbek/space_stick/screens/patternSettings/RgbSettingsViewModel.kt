@@ -8,31 +8,47 @@ import kotlinx.coroutines.launch
 class RgbSettingsViewModel(private val apiService: StickService, application: Application) :
     BaseViewModel(application) {
 
-    fun init() {
-
+    fun onColorPickerSelected(colorArray: IntArray) {
+        val color = Rgb(colorArray[0], colorArray[1], colorArray[2])
+        setColor(color)
     }
 
-    fun onColorPickerSelected(rgb: IntArray) {
-
+    fun onChangeColorClicked(type: ColorsType) {
+        setColor(type.color)
     }
 
-    fun onChangeColorClicked() {
-
-    }
-
-    private fun setColor(rgb: List<Int>) {
+    private fun setColor(color: Rgb) {
         launch {
             try {
                 apiService.setColor(
-                    r = rgb[0],
-                    g = rgb[1],
-                    b = rgb[2]
+                    r = color.r,
+                    g = color.g,
+                    b = color.b
                 )
             } catch (exception: Exception) {
                 processException(exception) {
-                    setColor(rgb)
+                    setColor(color)
                 }
             }
         }
+    }
+
+    data class Rgb(
+        val r: Int,
+        val g: Int,
+        val b: Int
+    )
+
+    enum class ColorsType(val color: Rgb) {
+        WHITE(Rgb(255, 255, 255)),
+        RED(Rgb(255, 0, 48)),
+        VIOLET(Rgb(181, 0, 175)),
+        NEON(Rgb(123, 0, 183)),
+        DARK_BLUE(Rgb(72, 52, 180)),
+        BLUE(Rgb(0, 164, 246)),
+        GREEN(Rgb(99, 205, 70)),
+        YELLOW(Rgb(251, 237, 55)),
+        ORANGE(Rgb(255, 142, 0)),
+        GRAY(Rgb(81, 124, 136))
     }
 }

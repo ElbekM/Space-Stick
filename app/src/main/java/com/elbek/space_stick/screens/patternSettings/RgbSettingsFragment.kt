@@ -23,29 +23,27 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViews()
         bindViewModel()
-        viewModel.init()
-    }
-
-    override fun bindViewModel() {
-        super.bindViewModel()
     }
 
     private fun initViews() {
 
         backImageView.setOnClickListener { close() }
 
-        whitePatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        redPatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        violetPatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        neonPatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        bluePatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        liteBluePatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        greenPatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        yellowPatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        orangePatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
-        grayPatternColor.setOnClickListener { viewModel.onChangeColorClicked() }
+        with(viewModel) {
+            whitePatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.WHITE) }
+            redPatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.RED) }
+            violetPatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.VIOLET) }
+            neonPatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.NEON) }
+            bluePatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.DARK_BLUE) }
+            liteBluePatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.BLUE) }
+            greenPatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.GREEN) }
+            yellowPatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.YELLOW) }
+            orangePatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.ORANGE) }
+            grayPatternColor.setOnClickListener { onChangeColorClicked(RgbSettingsViewModel.ColorsType.GRAY) }
+        }
 
         colorPickerView.setColorListener(ColorEnvelopeListener { envelope, _ ->
             viewModel.onColorPickerSelected(envelope.argb)
