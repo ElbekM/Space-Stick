@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
+import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     : BaseViewModel(application) {
 
     private var patternPosition = 0
+    private var patternsCount = 0
     //TODO: onPause observe and change icon
     val isOnPause = MutableLiveData<Boolean>(false)
     val wifiName = MutableLiveData<String>()
@@ -36,7 +38,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onPreviousButtonClicked() {
-        patternPosition -= 1
+        patternPosition = (patternPosition - 1).modularAdd(patternsCount)
         setPattern(patternPosition)
     }
 
@@ -46,7 +48,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onForwardButtonClicked() {
-        patternPosition += 1
+        patternPosition = (patternPosition + 1).modularAdd(patternsCount)
         setPattern(patternPosition)
     }
 
@@ -121,6 +123,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
             add(Pattern("three_sin4"))
             add(Pattern("blendwave"))
         }
+        patternsCount = patterns.size
         patternsList.postValue(patterns)
     }
 
