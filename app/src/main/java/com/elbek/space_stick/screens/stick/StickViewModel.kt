@@ -22,11 +22,10 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     val patternsList = MutableLiveData<List<Pattern>>()
     val launchRgbSettingsScreen = LiveEvent()
 
-    fun init(wifiSsid: String?) {
-        val wifiName = wifiSsid ?: "SpaceStickWiFi"
-        this.wifiName.value = wifiName
+    fun init(wifiSsid: String) {
+        this.wifiName.value = wifiSsid
 
-        saveWifiNameToSharedPrefs(wifiName)
+        saveWifiNameToSharedPrefs(wifiSsid)
         setDefaultParameters()
         fillPatterns()
     }
@@ -60,7 +59,9 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onItemLongClicked(position: Int) {
-
+        if (position == 0) {
+            launchRgbSettingsScreen.call()
+        }
     }
 
     private fun setDefaultParameters() {
@@ -103,12 +104,6 @@ class StickViewModel(private val apiService: StickService, application: Applicat
                     setPattern(patternPosition)
                 }
             }
-        }
-    }
-
-    fun onItemLongClicked(position: Int) {
-        if (position == 0) {
-            launchRgbSettingsScreen.call()
         }
     }
 
