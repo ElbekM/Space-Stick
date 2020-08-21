@@ -12,6 +12,7 @@ import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
+import com.elbek.space_stick.common.utils.Utils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,12 +26,17 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     val launchAppSettingsCommand = LiveEvent()
 
     fun init() {
-
+        //TODO: check wifi connection
         checkLocationPermission()
         checkSharedPref()
     }
 
     fun onCheckConnectionClicked() {
+        if (wifiSsid.value.isNullOrEmpty()) {
+            getWifiSsid()
+            return
+        }
+
         launch {
             try {
                 apiService.checkConnection()
@@ -66,7 +72,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
 
         if (requestCode == Constants.LOCATION_REQUEST &&
             isPermissionsGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            getWifiName()
+            getWifiSsid()
         } else {
             showPermissionDialogDeniedByUserCommand.call(
                 Pair(Manifest.permission.ACCESS_FINE_LOCATION, requestCode)
@@ -79,13 +85,17 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     private fun checkLocationPermission() {
-        if (isPermissionsGranted(Manifest.permission.ACCESS_FINE_LOCATION))
-            getWifiName()
-        else
-            requestPermissions(listOf(Manifest.permission.ACCESS_FINE_LOCATION), Constants.LOCATION_REQUEST)
+        if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.O) {
+            if (isPermissionsGranted(Manifest.permission.ACCESS_FINE_LOCATION))
+                getWifiSsid()
+            else
+                requestPermissions(listOf(Manifest.permission.ACCESS_FINE_LOCATION), Constants.LOCATION_REQUEST)
+        } else {
+            getWifiSsid()
+        }
     }
 
-    private fun getWifiName() {
+    private fun getWifiSsid() {
         val connManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
         if (networkInfo != null && networkInfo.isConnected) {
@@ -93,13 +103,15 @@ class MainViewModel(private val apiService: StickService, application: Applicati
                 .getSystemService(Context.WIFI_SERVICE) as WifiManager
             val wifiInfo = wifiManager.connectionInfo
             if (wifiInfo.supplicantState == SupplicantState.COMPLETED) {
-                wifiSsid.value = wifiInfo.ssid
+                wifiSsid.value = Utils.validateWifiSsid(wifiInfo.ssid)
             }
+        } else {
+            //TODO: enable wifi dialog
         }
     }
 
     private fun checkSharedPref() {
-        //TODO: not wifi name, use some wifi uuid
+        //TODO: not wifi name, use some wifi uuid, fix case with default value
         val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
         if (preferences.contains(Constants.APP_PREFERENCES_WIFI)) {
             val wifiName = preferences.getString(Constants.APP_PREFERENCES_WIFI, "")

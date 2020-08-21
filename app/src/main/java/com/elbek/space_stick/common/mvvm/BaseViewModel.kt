@@ -11,8 +11,8 @@ import androidx.lifecycle.AndroidViewModel
 import com.elbek.space_stick.common.mvvm.commands.Command
 import com.elbek.space_stick.common.mvvm.commands.TCommand
 import kotlinx.coroutines.*
+import java.net.ConnectException
 import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel(application: Application) : AndroidViewModel(application), CoroutineScope {
@@ -64,7 +64,7 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     protected fun processException(exception: Exception, action: (() -> Unit)) {
         launch(Dispatchers.Main) {
             when (exception) {
-                is UnknownHostException -> {
+                is ConnectException -> {
                     showSnackBarWithAction("No internet connection") {
                         action()
                     }

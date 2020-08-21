@@ -9,93 +9,97 @@ import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class StickViewModel(
-    private val apiService: StickService,
-    application: Application
-) : BaseViewModel(application) {
+class StickViewModel(private val apiService: StickService, application: Application)
+    : BaseViewModel(application) {
 
     private var patternPosition = 0
-
+    //TODO: onPause observe and change icon
+    val isOnPause = MutableLiveData<Boolean>(false)
     val wifiName = MutableLiveData<String>()
     val patternsList = MutableLiveData<List<Pattern>>()
 
-    fun init(wifiSsid: String) {
-        wifiName.value = wifiSsid
+    fun init(wifiSsid: String?) {
+        val wifiName = wifiSsid ?: "SpaceStickWiFi"
+        this.wifiName.value = wifiName
 
-        saveWifiNameToSharedPrefs(wifiSsid)
+        saveWifiNameToSharedPrefs(wifiName)
+        setDefaultParameters()
         fillPatterns()
     }
 
     fun brightnessSeekBarChanged(position: Int) {
+        setBrightness(position)
+    }
+
+    fun speedSeekBarChanged(position: Int) {
+        setSpeed(position)
+    }
+
+    fun onPreviousButtonClicked() {
+        patternPosition -= 1
+        setPattern(patternPosition)
+    }
+
+    fun onPlayPauseButtonClicked() {
+        setPattern(if (isOnPause.value!!) patternPosition else 0)
+        isOnPause.value = !isOnPause.value!!
+    }
+
+    fun onForwardButtonClicked() {
+        patternPosition += 1
+        setPattern(patternPosition)
+    }
+
+    fun onItemClicked(position: Int) {
+        patternPosition = position
+        setPattern(patternPosition)
+    }
+
+    fun onItemLongClicked(position: Int) {
+
+    }
+
+    private fun setDefaultParameters() {
+        patternPosition = 0
+        setPattern(patternPosition)
+        setBrightness(100)
+        setSpeed(10)
+    }
+
+    private fun setBrightness(position: Int) {
         launch {
             try {
                 apiService.setBrightness(position)
             } catch (exception: Exception) {
                 processException(exception) {
-                    brightnessSeekBarChanged(position)
+                    setBrightness(position)
                 }
             }
         }
     }
 
-
-    fun speedSeekBarChanged(position: Int) {
+    private fun setSpeed(position: Int) {
         launch {
             try {
                 apiService.setSpeed(position)
             } catch (exception: Exception) {
                 processException(exception) {
-                    speedSeekBarChanged(position)
+                    setSpeed(position)
                 }
             }
         }
     }
 
-    fun onPreviousButtonClicked() {
+    private fun setPattern(patternPosition: Int) {
         launch {
             try {
-                patternPosition -= 1
                 apiService.setPattern(patternPosition)
             } catch (exception: Exception) {
                 processException(exception) {
-                    onPreviousButtonClicked()
+                    setPattern(patternPosition)
                 }
             }
         }
-    }
-
-    fun onPlayPauseButtonClicked() {
-
-    }
-
-    fun onForwardButtonClicked() {
-        launch {
-            try {
-                patternPosition += 1
-                apiService.setPattern(patternPosition)
-            } catch (exception: Exception) {
-                processException(exception) {
-                    onForwardButtonClicked()
-                }
-            }
-        }
-    }
-
-    fun onItemClicked(position: Int) {
-        launch {
-            try {
-                patternPosition = position
-                apiService.setPattern(position)
-            } catch (exception: Exception) {
-                processException(exception) {
-                    onItemClicked(position)
-                }
-            }
-        }
-    }
-
-    fun onItemLongClicked(position: Int) {
-
     }
 
     private fun fillPatterns() {
@@ -121,8 +125,10 @@ class StickViewModel(
     }
 
     private fun saveWifiNameToSharedPrefs(wifiName: String) {
-        val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
-        preferences.edit().putString(Constants.APP_PREFERENCES_WIFI, wifiName).apply()
+        if (wifiName != Constants.DEFAULT_WIFI_NAME) {
+            val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
+            preferences.edit().putString(Constants.APP_PREFERENCES_WIFI, wifiName).apply()
+        }
     }
 
     class Pattern(

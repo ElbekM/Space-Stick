@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.SeekBar
-import android.widget.Toast
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
@@ -28,7 +26,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         initViews()
         bindViewModel()
         viewModel.init(
-            requireArguments().getString(wifiNameKey, "")
+            requireArguments().getString(wifiNameKey)
         )
     }
 
@@ -80,7 +78,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     companion object {
         val wifiNameKey: String = ::wifiNameKey.name
 
-        fun newInstance(wifiSsid: String) =
+        fun newInstance(wifiSsid: String?) =
             StickFragment().apply {
                 arguments = Bundle().apply {
                     putString(wifiNameKey, wifiSsid)

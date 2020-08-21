@@ -35,11 +35,9 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
         super.bindViewModel()
 
         viewModel.launchStickScreenCommand.observe {
-            it?.let { wifiSsid ->
-                StickFragment
-                    .newInstance(wifiSsid)
-                    .showAllowingStateLoss(childFragmentManager)
-            }
+            StickFragment
+                .newInstance(it)
+                .showAllowingStateLoss(childFragmentManager)
         }
 
         viewModel.launchAppSettingsCommand.observe {
@@ -54,7 +52,7 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
         }
 
         viewModel.wifiSsid.observe {
-            wifiNameTextView.text = it ?: "unknown ssid"
+            wifiNameTextView.text = it
         }
     }
 
