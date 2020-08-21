@@ -32,6 +32,7 @@
             android:layout_toEndOf="@+id/spaceStickImageView"
             android:layout_marginStart="15dp"
             android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="24sp"
             tools:text="SpaceStickWiFi"/>
 
@@ -44,6 +45,7 @@
         android:layout_marginTop="-25dp"
         android:layout_marginStart="26dp"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:text="Brightness"/>
 
     <SeekBar
@@ -63,6 +65,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="26dp"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:text="Speed"/>
 
     <SeekBar

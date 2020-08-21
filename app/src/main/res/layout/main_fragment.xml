@@ -60,13 +60,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/checkConnectionButton"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_below="@+id/wifiNameTextView"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:text="Connect"
-        android:textSize="18sp"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
