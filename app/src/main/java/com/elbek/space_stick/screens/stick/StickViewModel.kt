@@ -10,6 +10,8 @@ import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.utils.Constants
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
@@ -62,16 +64,22 @@ class StickViewModel(private val apiService: StickService, application: Applicat
 
     fun onItemLongClicked(position: Int) {
         if (position == 0) {
-            onItemClicked(0)
+            onItemClicked(16)
             launchRgbSettingsScreen.call()
         }
     }
 
     private fun setDefaultParameters() {
         patternPosition = 0
-        setPattern(patternPosition)
-        setBrightness(100)
-        setSpeed(10)
+        launch(Dispatchers.Main) {
+            setSpeed(100)
+            setPattern(2)
+            delay(3000)
+            setPattern(patternPosition)
+            setBrightness(100)
+            setSpeed(10)
+        }
+
     }
 
     private fun setBrightness(position: Int) {

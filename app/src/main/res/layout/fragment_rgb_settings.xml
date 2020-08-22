@@ -29,6 +29,8 @@
             android:layout_centerVertical="true"
             android:src="@drawable/arrow_back"
             app:tint="@color/colorPrimary"
+            android:clickable="true"
+            android:focusable="true"
             tools:ignore="ContentDescription" />
 
     </RelativeLayout>
