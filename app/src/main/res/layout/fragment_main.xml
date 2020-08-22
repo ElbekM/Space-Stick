@@ -61,20 +61,39 @@
         android:textColor="@color/colorAccent"
         tools:text="SpaceStickWifi"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/checkConnectionButton"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_below="@+id/wifiNameTextView"
-        android:layout_marginTop="50dp"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="154dp"
+        android:layout_height="154dp"
         android:layout_centerHorizontal="true"
-        android:text="Connect"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/wifiNameTextView"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
+        android:backgroundTint="@color/colorPrimary"
         app:iconSize="24dp"
         app:iconPadding="0dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/checkConnectionButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:text="Connect"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
+            app:iconSize="24dp"
+            app:iconPadding="0dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </RelativeLayout>
