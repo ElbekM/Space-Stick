@@ -8,8 +8,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
-import com.elbek.space_stick.common.mvvm.commands.Command
-import com.elbek.space_stick.common.mvvm.commands.TCommand
+import com.elbek.space_stick.common.mvvm.commands.LiveEvent
+import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
 import kotlinx.coroutines.*
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -23,11 +23,11 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     protected val context: Context by lazy { getApplication<Application>() }
 
-    val closeCommand = Command()
-    val showSnackBarWithActionCommand = TCommand<Pair<String, (() -> Unit)>>()
-    val showSnackBarCommand = TCommand<String>()
-    val requestPermissionsCommand = TCommand<Pair<List<String>, Int>>()
-    val showPermissionDialogDeniedByUserCommand = TCommand<Pair<String, Int>>()
+    val closeCommand = LiveEvent()
+    val showSnackBarWithActionCommand = SingleLiveEvent<Pair<String, (() -> Unit)>>()
+    val showSnackBarCommand = SingleLiveEvent<String>()
+    val requestPermissionsCommand = SingleLiveEvent<Pair<List<String>, Int>>()
+    val showPermissionDialogDeniedByUserCommand = SingleLiveEvent<Pair<String, Int>>()
 
     open fun back() = closeCommand.call()
     open fun onPermissionsResult(requestCode: Int) { }

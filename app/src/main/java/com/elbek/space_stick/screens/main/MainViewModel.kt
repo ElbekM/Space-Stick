@@ -7,10 +7,10 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
-import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
+import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import com.elbek.space_stick.common.utils.Utils
 import kotlinx.coroutines.Dispatchers
@@ -21,9 +21,9 @@ import kotlinx.coroutines.withContext
 class MainViewModel(private val apiService: StickService, application: Application) :
     BaseViewModel(application) {
 
-    val wifiSsid = MutableLiveData<String>()
-    val connectionState = MutableLiveData<Boolean>()
-    val launchStickScreenCommand = MutableLiveData<String>()
+    val wifiSsid = SingleLiveEvent<String>()
+    val connectionState = SingleLiveEvent<Boolean>()
+    val launchStickScreenCommand = SingleLiveEvent<String>()
     val showRequestDialogCommand = LiveEvent()
     val launchAppSettingsCommand = LiveEvent()
 

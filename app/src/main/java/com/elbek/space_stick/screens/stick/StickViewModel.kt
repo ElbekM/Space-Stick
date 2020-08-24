@@ -3,12 +3,12 @@ package com.elbek.space_stick.screens.stick
 import android.app.Application
 import android.content.Context
 import androidx.annotation.DrawableRes
-import androidx.lifecycle.MutableLiveData
 import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.extensions.modularAdd
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
+import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,14 +20,15 @@ class StickViewModel(private val apiService: StickService, application: Applicat
 
     private var patternPosition = 0
     private var patternsCount = 0
-    //TODO: onPause observe and change icon
-    val onPause = MutableLiveData<Boolean>(false)
-    val wifiName = MutableLiveData<String>()
-    val patternsList = MutableLiveData<List<Pattern>>()
+
+    val onPause = SingleLiveEvent<Boolean>()
+    val wifiName = SingleLiveEvent<String>()
+    val patternsList = SingleLiveEvent<List<Pattern>>()
     val launchRgbSettingsScreen = LiveEvent()
 
     fun init(wifiSsid: String) {
         this.wifiName.value = wifiSsid
+        onPause.value = false
 
         saveWifiNameToSharedPrefs(wifiSsid)
         setDefaultParameters()

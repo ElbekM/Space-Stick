@@ -4,8 +4,6 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 
-typealias Command = LiveEvent
-
 class LiveEvent : () -> Unit {
     private val liveData = SingleMutableLiveData<Void>()
 

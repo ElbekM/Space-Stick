@@ -44,19 +44,19 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
             arguments = Bundle()
         }
 
-        arguments!!.putInt(originalScreenOrientationKey, activity!!.requestedOrientation)
+        requireArguments().putInt(originalScreenOrientationKey, requireActivity().requestedOrientation)
     }
 
     override fun onResume() {
         super.onResume()
 
-        activity!!.requestedOrientation = screenOrientation
+        requireActivity().requestedOrientation = screenOrientation
     }
 
     override fun onPause() {
         super.onPause()
 
-        activity!!.requestedOrientation = arguments!!.getInt(originalScreenOrientationKey)
+        requireActivity().requestedOrientation = requireArguments().getInt(originalScreenOrientationKey)
     }
 
     @SuppressLint("RestrictedApi")
