@@ -25,8 +25,9 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     val wifiName = SingleLiveEvent<String>()
     val patternsList = SingleLiveEvent<List<Pattern>>()
 
-    val launchRgbSettingsScreen = LiveEvent()
     val launchSettingsScreen = LiveEvent()
+    val launchRgbSettingsScreen = LiveEvent()
+    val launchPatternSettingsScreen = LiveEvent()
 
     fun init(wifiSsid: String) {
         this.wifiName.value = wifiSsid
@@ -73,6 +74,8 @@ class StickViewModel(private val apiService: StickService, application: Applicat
         if (position == 0) {
             onItemClicked(16)
             launchRgbSettingsScreen.call()
+        } else {
+            launchPatternSettingsScreen.call()
         }
     }
 
