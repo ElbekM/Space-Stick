@@ -9,6 +9,7 @@ import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsFragment
+import com.elbek.space_stick.screens.settings.SettingsFragment
 import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
 import kotlinx.android.synthetic.main.fragment_stick.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,6 +63,12 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
             }
         }
 
+        viewModel.launchSettingsScreen.observe {
+            SettingsFragment
+                .newInstance()
+                .showAllowingStateLoss(childFragmentManager)
+        }
+
         viewModel.launchRgbSettingsScreen.observe {
             RgbSettingsFragment
                 .newInstance()
@@ -70,6 +77,8 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     }
 
     private fun initViews() {
+        settingsImageView.setOnClickListener { viewModel.onSettingsClicked() }
+
         brightnessSeekBar.setOnSeekBarChangeListener(this)
         speedSeekBar.setOnSeekBarChangeListener(this)
 

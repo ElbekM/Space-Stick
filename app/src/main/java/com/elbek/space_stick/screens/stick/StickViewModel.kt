@@ -24,7 +24,9 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     val onPause = SingleLiveEvent<Boolean>()
     val wifiName = SingleLiveEvent<String>()
     val patternsList = SingleLiveEvent<List<Pattern>>()
+
     val launchRgbSettingsScreen = LiveEvent()
+    val launchSettingsScreen = LiveEvent()
 
     fun init(wifiSsid: String) {
         this.wifiName.value = wifiSsid
@@ -33,6 +35,10 @@ class StickViewModel(private val apiService: StickService, application: Applicat
         saveWifiNameToSharedPrefs(wifiSsid)
         setDefaultParameters()
         fillPatterns()
+    }
+
+    fun onSettingsClicked() {
+        launchSettingsScreen.call()
     }
 
     fun brightnessSeekBarChanged(position: Int) {
