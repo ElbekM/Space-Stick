@@ -10,6 +10,7 @@ import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import com.elbek.space_stick.models.Pattern
+import com.elbek.space_stick.models.WifiStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,19 +19,21 @@ import java.lang.Exception
 class StickViewModel(private val apiService: StickService, application: Application) :
     BaseViewModel(application) {
 
+    private var wifiName: String? = null
     private var patternPosition = 0
     private var patternsCount = 0
 
     val onPause = SingleLiveEvent<Boolean>()
-    val wifiName = SingleLiveEvent<String>()
+    val wifiStatus = SingleLiveEvent<WifiStatus>()
     val patternsList = SingleLiveEvent<List<Pattern>>()
 
-    val launchSettingsScreen = LiveEvent()
+    val launchSettingsScreen = SingleLiveEvent<Pair<String?, Int>>()
     val launchRgbSettingsScreen = LiveEvent()
     val launchPatternSettingsScreen = LiveEvent()
 
     fun init(wifiSsid: String) {
-        this.wifiName.value = wifiSsid
+        wifiName = wifiSsid
+        wifiStatus.value = WifiStatus.CONNECTED
         onPause.value = false
 
         saveWifiNameToSharedPrefs(wifiSsid)
@@ -39,7 +42,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onSettingsClicked() {
-        launchSettingsScreen.call()
+        launchSettingsScreen.value = Pair(wifiName, patternPosition + 1)
     }
 
     fun brightnessSeekBarChanged(position: Int) {
@@ -81,6 +84,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
 
     private fun setDefaultParameters() {
         patternPosition = 0
+
         launch(Dispatchers.Main) {
             setSpeed(100)
             setPattern(2)
@@ -89,14 +93,15 @@ class StickViewModel(private val apiService: StickService, application: Applicat
             setBrightness(100)
             setSpeed(10)
         }
-
     }
 
     private fun setBrightness(position: Int) {
         launch {
             try {
                 apiService.setBrightness(position)
+                wifiStatus.postValue(WifiStatus.CONNECTED)
             } catch (exception: Exception) {
+                wifiStatus.postValue(WifiStatus.FAILED)
                 processException(exception) {
                     setBrightness(position)
                 }
@@ -108,7 +113,9 @@ class StickViewModel(private val apiService: StickService, application: Applicat
         launch {
             try {
                 apiService.setSpeed(position)
+                wifiStatus.postValue(WifiStatus.CONNECTED)
             } catch (exception: Exception) {
+                wifiStatus.postValue(WifiStatus.FAILED)
                 processException(exception) {
                     setSpeed(position)
                 }
@@ -120,7 +127,9 @@ class StickViewModel(private val apiService: StickService, application: Applicat
         launch {
             try {
                 apiService.setPattern(patternPosition)
+                wifiStatus.postValue(WifiStatus.CONNECTED)
             } catch (exception: Exception) {
+                wifiStatus.postValue(WifiStatus.FAILED)
                 processException(exception) {
                     setPattern(patternPosition)
                 }

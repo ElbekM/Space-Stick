@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchMainScreen() {
-        StickFragment
-            .newInstance("Android WiFi Test")
+        MainFragment
+            .newInstance()
             .showAllowingStateLoss(supportFragmentManager)
     }
 }

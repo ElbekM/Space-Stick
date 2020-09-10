@@ -1,13 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/lite"
     tools:context=".screens.settings.SettingsFragment">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/tabRelativeLayout"
+        android:layout_margin="24dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="45dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tabTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Settings"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/backImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/colorPrimary"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/profileInfoRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_below="@+id/tabRelativeLayout">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/spaceStickImageView"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:padding="3dp"
+            android:src="@drawable/orion_stick"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/modelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/spaceStickImageView"
+            android:text="Model:"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/modelNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/modelTextView"
+            android:text="Orion"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/batteryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/modelTextView"
+            android:layout_toEndOf="@+id/spaceStickImageView"
+            android:text="Battery level:"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/batteryCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/modelTextView"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/batteryTextView"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:text="100%"
+            tools:text="100%" />
+
+        <TextView
+            android:id="@+id/wifiTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spaceStickImageView"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:text="Wifi name:"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/wifiNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/wifiTextView"
+            android:layout_below="@+id/spaceStickImageView"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="SpaceStickWiFi" />
+
+        <TextView
+            android:id="@+id/patternTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wifiTextView"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:text="Pattern selected:"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/patternNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/patternTextView"
+            android:layout_below="@+id/wifiTextView"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="1" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/versionTextView"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advanced settings"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="About us"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Rate us"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/versionTextView"
+        android:textSize="12sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.0 Build №1"
+        tools:text="Version 1.0 Build №10"/>
+
+</RelativeLayout>

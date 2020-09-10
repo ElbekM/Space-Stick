@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import com.elbek.space_stick.R
+import com.elbek.space_stick.common.extensions.getColorCompat
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
 import com.elbek.space_stick.screens.patternSettings.PatternSettingsFragment
@@ -38,9 +39,12 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     override fun bindViewModel() {
         super.bindViewModel()
 
-        viewModel.wifiName.observe {
+        viewModel.wifiStatus.observe {
             it?.let {
-                wifiNameTextView.text = it
+                wifiStatusPositiveTextView.text = it.value
+                wifiStatusPositiveTextView.setTextColor(
+                    requireContext().getColorCompat(it.color)
+                )
             }
         }
 
@@ -65,9 +69,11 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         }
 
         viewModel.launchSettingsScreen.observe {
-            SettingsFragment
-                .newInstance()
-                .showAllowingStateLoss(childFragmentManager)
+            it?.let { (wifiName, patternPosition) ->
+                SettingsFragment
+                    .newInstance(wifiName!!, patternPosition)
+                    .showAllowingStateLoss(childFragmentManager)
+            }
         }
 
         viewModel.launchRgbSettingsScreen.observe {

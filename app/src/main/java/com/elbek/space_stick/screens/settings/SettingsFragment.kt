@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.screens.stick.StickFragment.Companion.wifiNameKey
+import kotlinx.android.synthetic.main.fragment_pattern_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.backImageView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : BaseDialogFragment<SettingsViewModel>() {
@@ -22,18 +26,40 @@ class SettingsFragment : BaseDialogFragment<SettingsViewModel>() {
 
         initViews()
         bindViewModel()
-        viewModel.init()
+        viewModel.init(
+            requireArguments().getString(wifiNameKey),
+            requireArguments().getInt(patternPositionKey)
+        )
     }
 
     override fun bindViewModel() {
         super.bindViewModel()
+
+        viewModel.wifiName.observe {
+            it?.let {
+                wifiNameTextView.text = it
+            }
+        }
+
+        viewModel.patternPosition.observe {
+            it?.let {
+                patternNumberTextView.text = it.toString()
+            }
+        }
     }
 
     private fun initViews() {
-
+        backImageView.setOnClickListener { close() }
     }
 
     companion object {
-        fun newInstance() = SettingsFragment()
+        val patternPositionKey: String = ::patternPositionKey.name
+
+        fun newInstance(wifiName: String, patternPosition: Int) = SettingsFragment().apply {
+            arguments = Bundle().apply {
+                putString(wifiNameKey, wifiName)
+                putInt(patternPositionKey, patternPosition)
+            }
+        }
     }
 }
