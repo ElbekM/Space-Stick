@@ -26,6 +26,7 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViews()
         bindViewModel()
         viewModel.init()

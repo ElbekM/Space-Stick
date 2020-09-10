@@ -2,7 +2,6 @@ package com.elbek.space_stick.screens.stick
 
 import android.app.Application
 import android.content.Context
-import androidx.annotation.DrawableRes
 import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.extensions.modularAdd
@@ -10,6 +9,7 @@ import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
 import com.elbek.space_stick.common.utils.Constants
+import com.elbek.space_stick.models.Pattern
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -148,9 +148,4 @@ class StickViewModel(private val apiService: StickService, application: Applicat
             preferences.edit().putString(Constants.APP_PREFERENCES_WIFI, wifiName).apply()
         }
     }
-
-    class Pattern(
-        val name: String,
-        @DrawableRes val icon:  Int
-    )
 }
