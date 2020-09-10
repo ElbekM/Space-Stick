@@ -10,6 +10,8 @@ import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.fragment_pattern_settings.*
+import kotlinx.android.synthetic.main.fragment_pattern_settings.backImageView
+import kotlinx.android.synthetic.main.fragment_rgb_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PatternSettingsFragment : BaseDialogFragment<PatternSettingsViewModel>() {
@@ -34,6 +36,9 @@ class PatternSettingsFragment : BaseDialogFragment<PatternSettingsViewModel>() {
     }
     //TODO: refactoring
     private fun initViews() {
+
+        backImageView.setOnClickListener { close() }
+
         val sin = LineGraphSeries<DataPoint>()
         val cos = LineGraphSeries<DataPoint>()
 
