@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/pt_root_ui_font_family</item>
+        <item name="fontFamily">@font/pt_root_ui_font_family</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">

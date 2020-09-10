@@ -76,7 +76,6 @@
         app:iconPadding="0dp"
         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded">
 
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/checkConnectionButton"
             android:layout_width="150dp"

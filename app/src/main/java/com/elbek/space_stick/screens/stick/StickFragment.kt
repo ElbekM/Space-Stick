@@ -8,6 +8,7 @@ import android.widget.SeekBar
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
+import com.elbek.space_stick.screens.patternSettings.PatternSettingsFragment
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsFragment
 import com.elbek.space_stick.screens.settings.SettingsFragment
 import com.elbek.space_stick.screens.stick.adapter.PatternAdapter
@@ -33,7 +34,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
             requireArguments().getString(wifiNameKey, "")
         )
     }
-    
+
     override fun bindViewModel() {
         super.bindViewModel()
 
@@ -71,6 +72,12 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
 
         viewModel.launchRgbSettingsScreen.observe {
             RgbSettingsFragment
+                .newInstance()
+                .showAllowingStateLoss(childFragmentManager)
+        }
+
+        viewModel.launchPatternSettingsScreen.observe {
+            PatternSettingsFragment
                 .newInstance()
                 .showAllowingStateLoss(childFragmentManager)
         }
