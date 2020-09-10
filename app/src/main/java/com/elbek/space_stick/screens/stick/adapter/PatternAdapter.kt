@@ -5,12 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.elbek.space_stick.R
-import com.elbek.space_stick.screens.stick.StickViewModel
+import com.elbek.space_stick.models.Pattern
 import kotlinx.android.synthetic.main.item_stick_pattern.view.*
 
 class PatternAdapter : BaseAdapter() {
 
-    var items: List<StickViewModel.Pattern>? = null
+    var items: List<Pattern>? = null
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val pattern = items!![position]

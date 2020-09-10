@@ -11,120 +11,143 @@
         android:id="@+id/stickInfoRelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="56dp">
+        android:alpha="0.96"
+        android:background="@drawable/shape_background_rounded_bottom"
+        android:padding="26dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/spaceStickImageView"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:padding="5dp"
-            android:src="@drawable/lamp"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"/>
+            android:padding="3dp"
+            android:src="@drawable/orion_stick"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/modelTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/spaceStickImageView"
+            android:text="Orion"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
 
         <TextView
             android:id="@+id/wifiNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/spaceStickImageView"
+            android:layout_below="@+id/modelTextView"
             android:layout_marginStart="15dp"
-            android:layout_centerVertical="true"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            tools:text="SpaceStickWiFi"/>
+            android:layout_toEndOf="@+id/spaceStickImageView"
+            android:textColor="@color/lite"
+            android:textSize="20sp"
+            tools:text="SpaceStickWiFi" />
 
+        <ImageView
+            android:id="@+id/settingsImageView"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/shape_background_rounded"
+            android:padding="3dp"
+            android:src="@drawable/settings"
+            app:tint="@color/black"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 
-    <TextView
-        android:layout_below="@+id/stickInfoRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-25dp"
-        android:layout_marginStart="26dp"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:text="Brightness"/>
-
-    <SeekBar
-        android:id="@+id/brightnessSeekBar"
+    <RelativeLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/stickInfoRelativeLayout"
         android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
-        android:max="254"
-        android:progress="100"/>
-
-    <TextView
-        android:layout_below="@+id/brightnessSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="26dp"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:text="Speed"/>
-
-    <SeekBar
-        android:id="@+id/speedSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/brightnessSeekBar"
         android:layout_marginTop="30dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
-        android:max="100"
-        android:progress="10"/>
+        android:layout_marginEnd="26dp">
 
-    <LinearLayout
-        android:id="@+id/stickPlayerLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginEnd="26dp"
-        android:layout_below="@+id/speedSeekBar">
-
-        <ImageView
-            android:id="@+id/previousButtonImageView"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/brightnessTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/arrow_back"
-            app:tint="@color/black"
-            tools:ignore="ContentDescription"/>
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Brightness"/>
 
-        <ImageView
-            android:id="@+id/playPauseButtonImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/play"
-            app:tint="@color/black"
-            tools:ignore="ContentDescription"/>
-
-        <ImageView
-            android:id="@+id/forwardButtonImageView"
-            android:layout_width="wrap_content"
+        <SeekBar
+            android:id="@+id/brightnessSeekBar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/arrow_forward"
-            app:tint="@color/black"
-            tools:ignore="ContentDescription"/>
+            android:layout_below="@+id/brightnessTextView"
+            android:layout_marginTop="5dp"
+            android:max="254"
+            android:progress="100"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/speedTextView"
+            android:layout_below="@+id/brightnessSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Speed"/>
+
+        <SeekBar
+            android:id="@+id/speedSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/speedTextView"
+            android:layout_marginTop="5dp"
+            android:max="100"
+            android:progress="10"/>
+
+        <LinearLayout
+            android:id="@+id/stickPlayerLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_below="@+id/speedSeekBar">
+
+            <ImageView
+                android:id="@+id/previousButtonImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@drawable/arrow_back"
+                app:tint="@color/black"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/playPauseButtonImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@drawable/play"
+                app:tint="@color/black"
+                tools:ignore="ContentDescription"/>
+
+            <ImageView
+                android:id="@+id/forwardButtonImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@drawable/arrow_forward"
+                app:tint="@color/black"
+                tools:ignore="ContentDescription"/>
+        </LinearLayout>
+    </RelativeLayout>
 
     <GridView
         android:id="@+id/stickPatternsGridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stickPlayerLinearLayout"
+        android:layout_below="@+id/main"
         android:layout_marginTop="30dp"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
