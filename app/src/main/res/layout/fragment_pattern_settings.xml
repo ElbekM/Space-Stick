@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lite"
+    tools:context=".screens.patternSettings.PatternSettingsFragment">
+
+    <RelativeLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="24dp">
+
+        <TextView
+            android:id="@+id/tabTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Pattern settings"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/backImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/colorPrimary"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/chartInfoRelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_below="@+id/tab">
+
+        <TextView
+            android:id="@+id/chartLegendTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            android:text="Chart legend:"/>
+
+        <ImageView
+            android:id="@+id/sinImageView"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:layout_toEndOf="@+id/chartLegendTextView"
+            android:src="@drawable/shape_circle"
+            app:tint="@color/red"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/sinTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/sinImageView"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:text="Sine"/>
+
+        <ImageView
+            android:id="@+id/cosImageView"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            android:layout_toEndOf="@+id/sinTextView"
+            android:src="@drawable/shape_circle"
+            app:tint="@color/blue"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/cosTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/cosImageView"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:text="Cosine"/>
+
+    </RelativeLayout>
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphView"
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:layout_below="@+id/chartInfoRelativeLayout"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/paramsRekativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/graphView"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp">
+
+        <TextView
+            android:id="@+id/paramsTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:text="Parameters"/>
+
+        <TextView
+            android:id="@+id/brightnessTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/paramsTitleTextView"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Sine"/>
+
+        <SeekBar
+            android:id="@+id/brightnessSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/brightnessTextView"
+            android:layout_marginTop="5dp"
+            android:max="254"
+            android:progress="51"/>
+
+        <TextView
+            android:id="@+id/speedTextView"
+            android:layout_below="@+id/brightnessSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="Cosine"/>
+
+        <SeekBar
+            android:id="@+id/speedSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/speedTextView"
+            android:layout_marginTop="5dp"
+            android:max="100"
+            android:progress="26"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

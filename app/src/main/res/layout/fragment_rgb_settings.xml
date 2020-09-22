@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lite"
+    tools:context=".screens.patternSettings.RgbSettingsFragment">
+
+    <RelativeLayout
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="24dp">
+
+        <TextView
+            android:id="@+id/tabTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/scr_rgb_settings_lbl_tab_title"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/backImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/colorPrimary"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tab"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#7b00b7"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:iconPadding="0dp"
+        app:iconSize="24dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="3dp">
+
+        <com.skydoves.colorpickerview.ColorPickerView
+            android:id="@+id/colorPickerView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            app:palette="@drawable/palette"
+            app:selector="@drawable/wheel" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rounded_background_top_lr"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/whitePatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="@color/white"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/redPatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#ff0030"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/violetPatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#7b00b7"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/neonPatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#b500af"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bluePatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#4834b4"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/liteBluePatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#00a4f6"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/greenPatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#63cd46"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/yellowPatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#faed37"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/orangePatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#ff8d00"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/grayPatternColor"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerInParent="true"
+                    android:backgroundTint="#517c88"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

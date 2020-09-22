@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".screens.main.MainFragment">
+
+    <ImageView
+        android:id="@+id/spaceStickImageView"
+        android:layout_width="match_parent"
+        android:layout_height="382dp"
+        android:layout_margin="20dp"
+        android:src="@drawable/space_stick"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/wifi"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/spaceStickImageView"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/wifiNameTextView"
+        android:src="@drawable/wifi"
+        app:tint="@color/black"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/unknownWifi"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/spaceStickImageView"
+        android:layout_marginEnd="5dp"
+        android:layout_toStartOf="@+id/wifiNameTextView"
+        android:src="@drawable/unknown_wifi"
+        android:visibility="gone"
+        app:tint="@color/black"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/wifiOff"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/spaceStickImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/wifi_off"
+        android:visibility="gone"
+        app:tint="@color/black"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/wifiNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spaceStickImageView"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorAccent"
+        android:textSize="26sp"
+        tools:text="SpaceStickWifi" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="154dp"
+        android:layout_height="154dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
+        app:iconPadding="0dp"
+        app:iconSize="24dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded">
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/checkConnectionButton"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/scr_main_lbl_connect"
+            app:iconPadding="0dp"
+            app:iconSize="24dp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
