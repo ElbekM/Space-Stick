@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.screens.stick.StickFragment.Companion.wifiNameKey
-import kotlinx.android.synthetic.main.fragment_pattern_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.backImageView
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -9,28 +9,28 @@
 
     <RelativeLayout
         android:id="@+id/tab"
-        android:layout_margin="24dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="45dp"
+        android:layout_margin="24dp">
 
         <TextView
             android:id="@+id/tabTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="24sp"
+            android:text="@string/scr_rgb_settings_lbl_tab_title"
             android:textColor="@color/colorPrimary"
-            android:text="Pattern settings" />
+            android:textSize="24sp" />
 
         <ImageView
             android:id="@+id/backImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/arrow_back"
-            app:tint="@color/colorPrimary"
             android:clickable="true"
             android:focusable="true"
+            android:src="@drawable/arrow_back"
+            app:tint="@color/colorPrimary"
             tools:ignore="ContentDescription" />
 
     </RelativeLayout>
@@ -38,19 +38,19 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tab"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:layout_below="@+id/tab"
+        android:backgroundTint="#7b00b7"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"
         android:insetBottom="0dp"
-        android:backgroundTint="#7b00b7"
-        app:strokeColor="@color/colorPrimary"
-        app:strokeWidth="3dp"
-        app:iconSize="24dp"
         app:iconPadding="0dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded">
+        app:iconSize="24dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="3dp">
 
         <com.skydoves.colorpickerview.ColorPickerView
             android:id="@+id/colorPickerView"
@@ -65,16 +65,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="20dp"
         android:background="@drawable/rounded_background_top_lr"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -86,16 +86,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="@color/white"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="@color/white"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 
@@ -109,16 +109,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#ff0030"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#ff0030"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
 
             </RelativeLayout>
@@ -133,16 +133,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#7b00b7"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#7b00b7"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 
@@ -156,16 +156,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#b500af"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#b500af"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 
@@ -179,16 +179,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#4834b4"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#4834b4"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 
@@ -197,8 +197,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -210,16 +210,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#00a4f6"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#00a4f6"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
 
             </RelativeLayout>
@@ -234,16 +234,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#63cd46"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#63cd46"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 
@@ -251,21 +251,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/yellowPatternColor"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#faed37"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#faed37"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -278,16 +279,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#ff8d00"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#ff8d00"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 
@@ -301,16 +302,16 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
+                    android:backgroundTint="#517c88"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
-                    android:backgroundTint="#517c88"
-                    app:strokeColor="@color/colorPrimary"
-                    app:strokeWidth="2dp"
-                    app:iconSize="24dp"
                     app:iconPadding="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+                    app:iconSize="24dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
+                    app:strokeColor="@color/colorPrimary"
+                    app:strokeWidth="2dp" />
 
             </RelativeLayout>
 

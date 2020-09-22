@@ -8,6 +8,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
+import com.elbek.space_stick.R
+import com.elbek.space_stick.common.extensions.toRvalue
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
 import kotlinx.coroutines.*
@@ -46,6 +48,9 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     protected fun getColor(@ColorRes resId: Int): Int = ContextCompat.getColor(context, resId)
 
+    protected fun showSnackBar(stringResourceId: Int) =
+        showSnackBar(stringResourceId.toRvalue())
+
     protected fun showSnackBar(message: String) {
         launch(Dispatchers.Main) {
             showSnackBarCommand.postValue(message)
@@ -65,16 +70,16 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         launch(Dispatchers.Main) {
             when (exception) {
                 is ConnectException -> {
-                    showSnackBarWithAction("No internet connection") {
+                    showSnackBarWithAction(R.string.scr_any_msg_error_no_connection.toRvalue()) {
                         action()
                     }
                 }
                 is SocketTimeoutException -> {
-                    showSnackBarWithAction("Failed connection") {
+                    showSnackBarWithAction(R.string.scr_any_msg_failed_connection.toRvalue()) {
                         action()
                     }
                 }
-                else -> showToast("Something went wrong")
+                else -> showToast(R.string.scr_any_msg_something_went_wrong.toRvalue())
             }
         }
         exception.printStackTrace()

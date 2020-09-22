@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
+import com.elbek.space_stick.common.extensions.toRvalue
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
 import com.elbek.space_stick.screens.stick.StickFragment
@@ -59,9 +60,9 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
         viewModel.connectionState.observe {
             it?.let { connection ->
                 if (connection) {
-                    checkConnectionButton.text = "Connection..."
+                    checkConnectionButton.text = R.string.scr_main_lbl_connecting.toRvalue()
                 } else {
-                    checkConnectionButton.text = "Connect"
+                    checkConnectionButton.text = R.string.scr_main_lbl_connect.toRvalue()
                 }
             }
         }

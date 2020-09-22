@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screens.stick.StickFragment">
@@ -31,10 +30,10 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:layout_toEndOf="@+id/spaceStickImageView"
-            android:textStyle="bold"
-            android:text="Orion"
+            android:text="@string/scr_stick_lbl_model"
             android:textColor="@color/white"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/wifiStatusPositiveTextView"
@@ -73,9 +72,9 @@
             android:id="@+id/brightnessTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:text="@string/scr_stick_lbl_brightness"
             android:textColor="@color/black"
-            android:text="Brightness"/>
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/brightnessSeekBar"
@@ -84,17 +83,17 @@
             android:layout_below="@+id/brightnessTextView"
             android:layout_marginTop="5dp"
             android:max="254"
-            android:progress="100"/>
+            android:progress="100" />
 
         <TextView
             android:id="@+id/speedTextView"
-            android:layout_below="@+id/brightnessSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/brightnessSeekBar"
             android:layout_marginTop="26dp"
-            android:textSize="18sp"
+            android:text="@string/scr_stick_lbl_speed"
             android:textColor="@color/black"
-            android:text="Speed"/>
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/speedSeekBar"
@@ -103,44 +102,44 @@
             android:layout_below="@+id/speedTextView"
             android:layout_marginTop="5dp"
             android:max="100"
-            android:progress="10"/>
+            android:progress="10" />
 
         <LinearLayout
             android:id="@+id/stickPlayerLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_below="@+id/speedSeekBar">
+            android:layout_below="@+id/speedSeekBar"
+            android:layout_marginTop="26dp">
 
             <ImageView
                 android:id="@+id/previousButtonImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:src="@drawable/arrow_back"
                 app:tint="@color/black"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/playPauseButtonImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:src="@drawable/play"
                 app:tint="@color/black"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/forwardButtonImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:src="@drawable/arrow_forward"
                 app:tint="@color/black"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -149,15 +148,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main"
-        android:layout_marginTop="30dp"
         android:layout_marginStart="26dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="10dp"
         android:columnWidth="100dp"
-        android:stretchMode="columnWidth"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="5dp"
         android:horizontalSpacing="5dp"
-        tools:listitem="@layout/item_stick_pattern"/>
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="5dp"
+        tools:listitem="@layout/item_stick_pattern" />
 
 </RelativeLayout>

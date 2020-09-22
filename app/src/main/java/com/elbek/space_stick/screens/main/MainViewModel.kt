@@ -7,7 +7,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
+import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
+import com.elbek.space_stick.common.extensions.toRvalue
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
@@ -46,7 +48,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
                 delay(1000)
                 launchStickScreenCommand.postValue(wifiSsid.value)
                 withContext(Dispatchers.Main) {
-                    showToast("SUCCESS")
+                    showToast(R.string.scr_any_msg_success.toRvalue())
                 }
             } catch (exception: Exception) {
                 processException(exception) {
@@ -60,12 +62,12 @@ class MainViewModel(private val apiService: StickService, application: Applicati
 
     fun showDialog(context: Context) {
         AlertDialog.Builder(context).apply {
-            setTitle("WARNING")
-            setMessage("To correct work app need location permission")
-            setPositiveButton("Go to settings") { _, _ ->
+            setTitle(R.string.scr_main_lbl_dialog_title)
+            setMessage(R.string.scr_main_lbl_dialog_location_permission)
+            setPositiveButton(R.string.scr_main_lbl_dialog_settings) { _, _ ->
                 launchAppSettingsCommand.call()
             }
-            setNegativeButton("Cancel") { dialog, _ ->
+            setNegativeButton(R.string.scr_main_lbl_dialog_cancel) { dialog, _ ->
                 dialog.cancel()
             }
             create()

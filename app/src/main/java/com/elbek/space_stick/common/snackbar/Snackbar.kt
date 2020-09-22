@@ -33,7 +33,7 @@ class Snackbar {
 
         snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
             .maxLines = 5
-        snackbar.setAction("Ok") { snackbar.dismiss() }
+        snackbar.setAction(R.string.scr_any_msg_ok) { snackbar.dismiss() }
         snackbar.show()
     }
 
@@ -47,7 +47,7 @@ class Snackbar {
 
         snackbar.view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
             .maxLines = 5
-        snackbar.setAction("Retry") { action() }
+        snackbar.setAction(R.string.scr_any_msg_retry) { action() }
         snackbar.show()
     }
 }
