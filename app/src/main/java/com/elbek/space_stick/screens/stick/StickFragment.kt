@@ -63,7 +63,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
 
         viewModel.patternsList.observe {
             it.let { patterns ->
-                stickPatternsGridView.apply {
+                stickPatternsRecyclerView.apply {
                     layoutManager = GridLayoutManager(requireContext(), 3)
                     adapter = PatternAdapter(
                         viewModel::onItemClicked,
