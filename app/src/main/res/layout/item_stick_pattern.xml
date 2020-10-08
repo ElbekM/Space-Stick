@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="5dp"
     android:padding="5dp"
     app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="12dp"
     app:cardElevation="0dp">
 
     <RelativeLayout
-        android:layout_width="96dp"
-        android:layout_height="96dp">
+        android:layout_width="100dp"
+        android:layout_height="100dp">
 
         <ImageView
             android:id="@+id/patternIcon"
@@ -21,6 +22,5 @@
             android:padding="10dp"
             android:src="@drawable/ic_pattern9"
             tools:ignore="ContentDescription" />
-
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

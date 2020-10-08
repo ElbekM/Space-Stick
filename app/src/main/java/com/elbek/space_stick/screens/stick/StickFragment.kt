@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.os.bundleOf
+import androidx.recyclerview.widget.GridLayoutManager
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.extensions.getColorCompat
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
@@ -61,10 +63,15 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
 
         viewModel.patternsList.observe {
             it.let { patterns ->
-                val adapter = PatternAdapter()
-                stickPatternsGridView.adapter = adapter
-                adapter.items = patterns
-                adapter.notifyDataSetChanged()
+                stickPatternsGridView.apply {
+                    layoutManager = GridLayoutManager(requireContext(), 3)
+                    adapter = PatternAdapter(
+                        viewModel::onItemClicked,
+                        viewModel::onItemLongClicked
+                    ).also { adapter ->
+                        adapter.setPatterns(patterns ?: listOf())
+                    }
+                }
             }
         }
 
@@ -98,14 +105,6 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         previousButtonImageView.setOnClickListener { viewModel.onPreviousButtonClicked() }
         playPauseButtonImageView.setOnClickListener { viewModel.onPlayPauseButtonClicked() }
         forwardButtonImageView.setOnClickListener { viewModel.onForwardButtonClicked() }
-
-        stickPatternsGridView.setOnItemClickListener { _, _, position, _ ->
-            viewModel.onItemClicked(position)
-        }
-        stickPatternsGridView.setOnItemLongClickListener { _, _, position, _ ->
-            viewModel.onItemLongClicked(position)
-            return@setOnItemLongClickListener true
-        }
     }
 
     override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) { }
@@ -120,11 +119,8 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     companion object {
         val wifiNameKey: String = ::wifiNameKey.name
 
-        fun newInstance(wifiSsid: String) =
-            StickFragment().apply {
-                arguments = Bundle().apply {
-                    putString(wifiNameKey, wifiSsid)
-                }
-            }
+        fun newInstance(wifiSsid: String) = StickFragment().apply {
+            arguments = bundleOf(wifiNameKey to wifiSsid)
+        }
     }
 }

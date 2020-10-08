@@ -93,6 +93,5 @@
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
             app:strokeColor="@color/white"
             app:strokeWidth="2dp" />
-
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>

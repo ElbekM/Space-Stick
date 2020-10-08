@@ -32,7 +32,6 @@
             android:src="@drawable/arrow_back"
             app:tint="@color/colorPrimary"
             tools:ignore="ContentDescription" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -144,8 +143,6 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             tools:text="1" />
-
-
     </RelativeLayout>
 
     <LinearLayout
@@ -179,7 +176,6 @@
             android:text="@string/scr_settings_lbl_rate_us"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp" />
-
     </LinearLayout>
 
     <TextView
@@ -192,5 +188,4 @@
         android:text="Version 1.0 Build №1"
         android:textSize="12sp"
         tools:text="Version 1.0 Build №10" />
-
 </RelativeLayout>
