@@ -36,16 +36,16 @@ class SettingsFragment : BaseDialogFragment<SettingsViewModel>() {
     override fun bindViewModel() {
         super.bindViewModel()
 
+        viewModel.appVersion.observe {
+            it?.let { appVersionTextView.text = it }
+        }
+
         viewModel.wifiName.observe {
-            it?.let {
-                wifiNameTextView.text = it
-            }
+            it?.let { wifiNameTextView.text = it }
         }
 
         viewModel.patternPosition.observe {
-            it?.let {
-                patternNumberTextView.text = it.toString()
-            }
+            it?.let { patternNumberTextView.text = it.toString() }
         }
     }
 

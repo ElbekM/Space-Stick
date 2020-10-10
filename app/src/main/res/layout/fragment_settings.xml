@@ -148,7 +148,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/versionTextView"
+        android:layout_above="@+id/appVersionTextView"
         android:layout_marginStart="26dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="50dp"
@@ -179,13 +179,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/versionTextView"
+        android:id="@+id/appVersionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:text="Version 1.0 Build №1"
-        android:textSize="12sp"
-        tools:text="Version 1.0 Build №10" />
+        tools:text="Version 1.0" />
 </RelativeLayout>

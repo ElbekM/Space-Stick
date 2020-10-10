@@ -10,8 +10,9 @@
 
     <ImageView
         android:id="@+id/spaceStickImageView"
-        android:layout_width="match_parent"
-        android:layout_height="382dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:src="@drawable/space_stick"
         tools:ignore="ContentDescription" />
