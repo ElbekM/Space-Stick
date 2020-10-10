@@ -1,28 +1,33 @@
 package com.elbek.space_stick.screens.stick.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.elbek.space_stick.R
 import com.elbek.space_stick.models.Pattern
-import kotlinx.android.synthetic.main.item_stick_pattern.view.*
 
-class PatternAdapter : BaseAdapter() {
+class PatternAdapter(
+    private val onItemClicked: (Int) -> Unit,
+    private val onItemLongClicked: (Int) -> Unit
+) : RecyclerView.Adapter<PatternViewHolder>() {
 
-    var items: List<Pattern>? = null
+    private var items: List<Pattern>? = null
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val pattern = items!![position]
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_stick_pattern, null)
-        view.patternIcon.setImageResource(pattern.icon)
-        return view
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PatternViewHolder =
+        PatternViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_stick_pattern, parent, false),
+            onItemClicked,
+            onItemLongClicked
+        )
+
+    override fun onBindViewHolder(holder: PatternViewHolder, position: Int) {
+        holder.bind(items!![position])
     }
 
-    override fun getItem(position: Int): Any = items!![position]
+    override fun getItemCount(): Int = items?.size ?: 0
 
-    override fun getItemId(position: Int): Long = position.toLong()
-
-    override fun getCount(): Int = items?.size ?: 0
+    internal fun setPatterns(patterns: List<Pattern>) {
+        items = patterns
+        notifyDataSetChanged()
+    }
 }

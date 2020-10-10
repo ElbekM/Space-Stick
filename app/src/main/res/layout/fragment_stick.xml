@@ -143,8 +143,8 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <GridView
-        android:id="@+id/stickPatternsGridView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stickPatternsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/main"
@@ -152,11 +152,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="10dp"
-        android:columnWidth="100dp"
-        android:horizontalSpacing="5dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="5dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/item_stick_pattern" />
-
 </RelativeLayout>

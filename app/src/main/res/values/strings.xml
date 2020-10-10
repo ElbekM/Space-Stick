@@ -27,6 +27,7 @@
     <string name="scr_settings_lbl_advanced_settings">Advanced settings</string>
     <string name="scr_settings_lbl_about_us">About us</string>
     <string name="scr_settings_lbl_rate_us">Rate us</string>
+    <string name="scr_settings_lbl_version">Version %s</string>
 
     <string name="scr_rgb_settings_lbl_tab_title">Pattern settings</string>
 </resources>

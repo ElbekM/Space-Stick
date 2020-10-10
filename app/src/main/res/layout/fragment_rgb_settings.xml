@@ -32,7 +32,6 @@
             android:src="@drawable/arrow_back"
             app:tint="@color/colorPrimary"
             tools:ignore="ContentDescription" />
-
     </RelativeLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -58,7 +57,6 @@
             android:layout_height="300dp"
             app:palette="@drawable/palette"
             app:selector="@drawable/wheel" />
-
     </com.google.android.material.card.MaterialCardView>
 
     <LinearLayout
@@ -96,7 +94,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -119,8 +116,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -143,7 +138,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -166,7 +160,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -189,9 +182,7 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -220,8 +211,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -244,7 +233,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -289,7 +277,6 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -312,11 +299,7 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />
-
             </RelativeLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 </RelativeLayout>
