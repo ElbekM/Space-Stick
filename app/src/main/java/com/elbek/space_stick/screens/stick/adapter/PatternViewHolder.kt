@@ -13,9 +13,9 @@ class PatternViewHolder(
 
     fun bind(item: Pattern) {
         with(itemView) {
-            setOnClickListener { onItemClicked(adapterPosition) }
+            setOnClickListener { onItemClicked(item.position) }
             setOnLongClickListener {
-                onItemLongClicked(adapterPosition)
+                onItemLongClicked(item.position)
                 return@setOnLongClickListener true
             }
 
