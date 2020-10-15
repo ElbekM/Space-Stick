@@ -11,6 +11,7 @@ import com.elbek.space_stick.R
 import com.elbek.space_stick.common.extensions.getColorCompat
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
+import com.elbek.space_stick.common.utils.Utils.calculateNumberOfColumns
 import com.elbek.space_stick.screens.patternSettings.PatternSettingsFragment
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsFragment
 import com.elbek.space_stick.screens.settings.SettingsFragment
@@ -64,7 +65,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         viewModel.patternsList.observe {
             it.let { patterns ->
                 stickPatternsRecyclerView.apply {
-                    layoutManager = GridLayoutManager(requireContext(), 3)
+                    layoutManager = GridLayoutManager(requireContext(), calculateNumberOfColumns())
                     adapter = PatternAdapter(
                         viewModel::onItemClicked,
                         viewModel::onItemLongClicked
