@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
-import com.elbek.space_stick.models.ColorsType
+import com.elbek.space_stick.models.ColorType
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.android.synthetic.main.fragment_rgb_settings.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,16 +33,16 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
         backImageView.setOnClickListener { close() }
 
         with(viewModel) {
-            whitePatternColor.setOnClickListener { onChangeColorClicked(ColorsType.WHITE) }
-            redPatternColor.setOnClickListener { onChangeColorClicked(ColorsType.RED) }
-            violetPatternColor.setOnClickListener { onChangeColorClicked(ColorsType.VIOLET) }
-            neonPatternColor.setOnClickListener { onChangeColorClicked(ColorsType.NEON) }
-            bluePatternColor.setOnClickListener { onChangeColorClicked(ColorsType.DARK_BLUE) }
-            liteBluePatternColor.setOnClickListener { onChangeColorClicked(ColorsType.BLUE) }
-            greenPatternColor.setOnClickListener { onChangeColorClicked(ColorsType.GREEN) }
-            yellowPatternColor.setOnClickListener { onChangeColorClicked(ColorsType.YELLOW) }
-            orangePatternColor.setOnClickListener { onChangeColorClicked(ColorsType.ORANGE) }
-            grayPatternColor.setOnClickListener { onChangeColorClicked(ColorsType.GRAY) }
+            whitePatternColor.setOnClickListener { onChangeColorClicked(ColorType.WHITE) }
+            redPatternColor.setOnClickListener { onChangeColorClicked(ColorType.RED) }
+            violetPatternColor.setOnClickListener { onChangeColorClicked(ColorType.VIOLET) }
+            neonPatternColor.setOnClickListener { onChangeColorClicked(ColorType.NEON) }
+            bluePatternColor.setOnClickListener { onChangeColorClicked(ColorType.DARK_BLUE) }
+            liteBluePatternColor.setOnClickListener { onChangeColorClicked(ColorType.BLUE) }
+            greenPatternColor.setOnClickListener { onChangeColorClicked(ColorType.GREEN) }
+            yellowPatternColor.setOnClickListener { onChangeColorClicked(ColorType.YELLOW) }
+            orangePatternColor.setOnClickListener { onChangeColorClicked(ColorType.ORANGE) }
+            additionalColors.setOnClickListener { onCustomColorsClicked() }
         }
 
         colorPickerView.setColorListener(ColorEnvelopeListener { envelope, _ ->

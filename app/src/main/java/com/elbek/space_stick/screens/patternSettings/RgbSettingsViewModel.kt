@@ -3,7 +3,7 @@ package com.elbek.space_stick.screens.patternSettings
 import android.app.Application
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
-import com.elbek.space_stick.models.ColorsType
+import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.models.Rgb
 import kotlinx.coroutines.launch
 
@@ -15,8 +15,12 @@ class RgbSettingsViewModel(private val apiService: StickService, application: Ap
         setColor(color)
     }
 
-    fun onChangeColorClicked(type: ColorsType) {
+    fun onChangeColorClicked(type: ColorType) {
         setColor(type.color)
+    }
+
+    fun onCustomColorsClicked() {
+        //TODO: Open dialog with custom colors
     }
 
     private fun setColor(color: Rgb) {

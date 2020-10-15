@@ -285,17 +285,19 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/grayPatternColor"
+                    android:id="@+id/additionalColors"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_centerInParent="true"
-                    android:backgroundTint="#517c88"
+                    android:backgroundTint="@color/colorAccent"
                     android:insetLeft="0dp"
                     android:insetTop="0dp"
                     android:insetRight="0dp"
                     android:insetBottom="0dp"
+                    app:icon="@drawable/ic_more_horiz"
+                    app:iconGravity="textEnd"
                     app:iconPadding="0dp"
-                    app:iconSize="24dp"
+                    app:iconSize="34dp"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"
                     app:strokeColor="@color/colorPrimary"
                     app:strokeWidth="2dp" />

@@ -1,6 +1,6 @@
 package com.elbek.space_stick.models
 
-enum class ColorsType(val color: Rgb) {
+enum class ColorType(val color: Rgb) {
     WHITE(Rgb(255, 255, 255)),
     RED(Rgb(255, 0, 0)),
     VIOLET(Rgb(181, 0, 175)),
@@ -9,6 +9,5 @@ enum class ColorsType(val color: Rgb) {
     BLUE(Rgb(0, 164, 246)),
     GREEN(Rgb(0, 255, 0)),
     YELLOW(Rgb(251, 237, 55)),
-    ORANGE(Rgb(255, 142, 0)),
-    GRAY(Rgb(81, 124, 136))
+    ORANGE(Rgb(255, 142, 0))
 }
