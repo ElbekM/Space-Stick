@@ -9,6 +9,7 @@ import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.models.ColorType
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.android.synthetic.main.fragment_rgb_settings.*
+import kotlinx.android.synthetic.main.view_color_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
@@ -29,8 +30,11 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
     }
 
     private fun initViews() {
-
         backImageView.setOnClickListener { close() }
+
+        colorPickerView.setColorListener(ColorEnvelopeListener { envelope, _ ->
+            viewModel.onColorPickerSelected(envelope.argb)
+        })
 
         with(viewModel) {
             whitePatternColor.setOnClickListener { onChangeColorClicked(ColorType.WHITE) }
@@ -44,10 +48,6 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
             orangePatternColor.setOnClickListener { onChangeColorClicked(ColorType.ORANGE) }
             additionalColors.setOnClickListener { onCustomColorsClicked() }
         }
-
-        colorPickerView.setColorListener(ColorEnvelopeListener { envelope, _ ->
-            viewModel.onColorPickerSelected(envelope.argb)
-        })
     }
 
     companion object {
