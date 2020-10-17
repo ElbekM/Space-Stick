@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.common.utils.AnimationUtils.showWithAnimation
 import com.elbek.space_stick.common.utils.Utils.calculateNumberOfColumns
 import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.screens.patternSettings.adaper.CustomColorAdapter
@@ -39,7 +40,7 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
         super.bindViewModel()
 
         viewModel.customColorsLayoutVisible.observe {
-            customColorsLayout.isVisible = it ?: false
+            customColorsLayout.showWithAnimation(it ?: false, 200L)
         }
 
         viewModel.addColorTextVisible.observe {
