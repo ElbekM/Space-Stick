@@ -34,7 +34,7 @@ class RgbSettingsViewModel(
 
     fun init() = launch {
         customColorList.postValue(
-            colorDatabaseProvider.loadFromDatabase() ?: mutableListOf()
+            colorDatabaseProvider.getCustomColors() ?: mutableListOf()
         )
     }
 
@@ -94,8 +94,8 @@ class RgbSettingsViewModel(
         customColorList.value = customColorList.value?.apply {
             add(Rgb(colorArray[1], colorArray[2], colorArray[3]))
         }
-        launch {
-            colorDatabaseProvider.addColorToDatabase(customColorList.value!!)
+        customColorList.value?.let {
+            launch { colorDatabaseProvider.addColorToDatabase(it[it.lastIndex]) }
         }
     }
 }

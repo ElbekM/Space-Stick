@@ -19,8 +19,7 @@ data class RgbEntity(
     )
 
     companion object {
-        fun createRgbEntity(rgbList: List<Rgb>): List<RgbEntity> =
-            rgbList.map { RgbEntity(it) }
+        fun createRgbEntity(rgbList: Rgb): RgbEntity = RgbEntity(rgbList)
     }
 }
 
