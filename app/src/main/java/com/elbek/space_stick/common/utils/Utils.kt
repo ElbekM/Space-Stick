@@ -1,6 +1,7 @@
 package com.elbek.space_stick.common.utils
 
 import com.elbek.space_stick.SpaceStickApplication
+import java.util.UUID
 
 object Utils {
 
@@ -19,4 +20,6 @@ object Utils {
         val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
         return (screenWidthDp / columnWidthDp + 0.5).toInt()
     }
+
+    fun getRandomUUID() = UUID.randomUUID().toString()
 }

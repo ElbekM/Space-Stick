@@ -6,14 +6,18 @@ import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.database.ColorDatabaseProvider
 import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.models.Rgb
 import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.coroutines.launch
 
-class RgbSettingsViewModel(private val apiService: StickService, application: Application) :
-    BaseViewModel(application) {
+class RgbSettingsViewModel(
+    private val apiService: StickService,
+    private val colorDatabaseProvider: ColorDatabaseProvider,
+    application: Application
+) : BaseViewModel(application) {
 
     val showColorPickerDialogLiveEvent = LiveEvent()
     val customColorsLayoutVisible = SingleLiveEvent<Boolean>()
@@ -48,8 +52,7 @@ class RgbSettingsViewModel(private val apiService: StickService, application: Ap
         ColorPickerDialog.Builder(context)
             .setTitle("ColorPicker Dialog")
             .setPositiveButton("Save", ColorEnvelopeListener { envelope, _ ->
-                //TODO: Save color into database
-                envelope.argb
+                addColorToDatabase(envelope.argb)
             })
             .setNegativeButton("Cancel") { dialogInterface, _ ->
                 dialogInterface.dismiss()
@@ -74,5 +77,9 @@ class RgbSettingsViewModel(private val apiService: StickService, application: Ap
                 }
             }
         }
+    }
+
+    private fun addColorToDatabase(rgb: IntArray) {
+        //TODO: add into database
     }
 }
