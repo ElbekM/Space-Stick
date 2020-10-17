@@ -7,10 +7,9 @@ import com.elbek.space_stick.models.entities.toModel
 
 class ColorDatabaseProvider(private val database: ColorDatabase) {
 
-    suspend fun loadFromDatabase(): List<Rgb> =
+    suspend fun loadFromDatabase(): MutableList<Rgb>? =
         database.getColorDbDao()
-            .getAll()
-            .colorRgb.toModel()
+            .getAll()?.colorRgb?.toModel()
 
     suspend fun addColorToDatabase(colorList: List<Rgb>) =
         database.getColorDbDao()

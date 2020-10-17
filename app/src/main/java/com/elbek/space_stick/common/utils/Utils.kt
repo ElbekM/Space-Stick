@@ -1,6 +1,7 @@
 package com.elbek.space_stick.common.utils
 
 import com.elbek.space_stick.SpaceStickApplication
+import com.elbek.space_stick.models.Rgb
 import java.util.UUID
 
 object Utils {
@@ -20,6 +21,9 @@ object Utils {
         val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
         return (screenWidthDp / columnWidthDp + 0.5).toInt()
     }
+
+    @JvmStatic
+    fun rgbToHex(rgb: Rgb): String = String.format("#%02x%02x%02x", rgb.r, rgb.g, rgb.b)
 
     fun getRandomUUID() = UUID.randomUUID().toString()
 }

@@ -24,4 +24,4 @@ data class RgbEntity(
     }
 }
 
-fun List<RgbEntity>.toModel(): List<Rgb> = map { Rgb(it.r, it.g, it.b) }.toMutableList()
+fun List<RgbEntity>.toModel(): MutableList<Rgb> = map { Rgb(it.r, it.g, it.b) }.toMutableList()

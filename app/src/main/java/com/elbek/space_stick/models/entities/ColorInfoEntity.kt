@@ -7,5 +7,5 @@ import com.elbek.space_stick.common.utils.Utils.getRandomUUID
 @Entity
 data class ColorInfoEntity(
     @PrimaryKey val id: String = getRandomUUID(),
-    val colorRgb: List<RgbEntity>
+    val colorRgb: List<RgbEntity>?
 )

@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.common.utils.Utils.calculateNumberOfColumns
 import com.elbek.space_stick.models.ColorType
+import com.elbek.space_stick.screens.patternSettings.adaper.CustomColorAdapter
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.android.synthetic.main.fragment_rgb_settings.*
 import kotlinx.android.synthetic.main.view_color_list.*
@@ -29,6 +32,7 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
 
         initViews()
         bindViewModel()
+        viewModel.init()
     }
 
     override fun bindViewModel() {
@@ -40,6 +44,20 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
 
         viewModel.showColorPickerDialogLiveEvent.observe {
             viewModel.showColorPickerDialog(requireContext())
+        }
+
+        viewModel.customColorList.observe { colors ->
+            with(customColorsRecyclerView) {
+                var colorAdapter = adapter as? CustomColorAdapter
+                if (colorAdapter == null) {
+                    colorAdapter = CustomColorAdapter(
+                        onItemClicked = viewModel::onChangeColorClicked
+                    )
+                    adapter = colorAdapter
+                    layoutManager = GridLayoutManager(requireContext(), calculateNumberOfColumns())
+                }
+                colorAdapter.setCustomColors(colors)
+            }
         }
     }
 
