@@ -42,6 +42,10 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
             customColorsLayout.isVisible = it ?: false
         }
 
+        viewModel.addColorTextVisible.observe {
+            addColorTextView.isVisible = it ?: false
+        }
+
         viewModel.showColorPickerDialogLiveEvent.observe {
             viewModel.showColorPickerDialog(requireContext())
         }
@@ -54,7 +58,10 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
                         onItemClicked = viewModel::onChangeColorClicked
                     )
                     adapter = colorAdapter
-                    layoutManager = GridLayoutManager(requireContext(), calculateNumberOfColumns())
+                    layoutManager = GridLayoutManager(
+                        requireContext(),
+                        calculateNumberOfColumns(GRID_ITEM_WIDTH_DP)
+                    )
                 }
                 colorAdapter.setCustomColors(colors)
             }
@@ -83,6 +90,8 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
     }
 
     companion object {
+        private const val GRID_ITEM_WIDTH_DP = 100f
+
         fun newInstance() = RgbSettingsFragment()
     }
 }

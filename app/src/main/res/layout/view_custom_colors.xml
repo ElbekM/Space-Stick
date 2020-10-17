@@ -17,10 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="10dp"
             android:text="Custom colors"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
+            android:textSize="22sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customColorsRecyclerView"
@@ -30,13 +31,23 @@
             android:layout_margin="16dp"
             tools:itemCount="3" />
 
+        <TextView
+            android:id="@+id/addColorTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/customColorTitleTextView"
+            android:gravity="center"
+            android:text="Add your own colors!"
+            android:textColor="@color/text_gray"
+            android:textSize="18sp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/addNewColorButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/customColorsRecyclerView"
             android:layout_centerHorizontal="true"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
             android:text="Add new color" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

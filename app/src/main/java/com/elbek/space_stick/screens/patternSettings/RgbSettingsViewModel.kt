@@ -11,7 +11,9 @@ import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.models.Rgb
 import com.skydoves.colorpickerview.ColorPickerDialog
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RgbSettingsViewModel(
     private val apiService: StickService,
@@ -20,6 +22,7 @@ class RgbSettingsViewModel(
 ) : BaseViewModel(application) {
 
     val showColorPickerDialogLiveEvent = LiveEvent()
+    val addColorTextVisible = SingleLiveEvent<Boolean>()
     val customColorsLayoutVisible = SingleLiveEvent<Boolean>()
     val customColorList = SingleLiveEvent<MutableList<Rgb>>()
 
@@ -33,9 +36,12 @@ class RgbSettingsViewModel(
     }
 
     fun init() = launch {
-        customColorList.postValue(
-            colorDatabaseProvider.getCustomColors() ?: mutableListOf()
-        )
+        colorDatabaseProvider.getCustomColors().let { colors ->
+            customColorList.postValue(colors ?: mutableListOf())
+            withContext(Dispatchers.Main) {
+                addColorTextVisible.value = colors.isNullOrEmpty()
+            }
+        }
     }
 
     fun onColorPickerSelected(colorArray: IntArray) {
@@ -91,6 +97,8 @@ class RgbSettingsViewModel(
     }
 
     private fun addColorToDatabase(colorArray: IntArray) {
+        addColorTextVisible.value = false
+
         customColorList.value = customColorList.value?.apply {
             add(Rgb(colorArray[1], colorArray[2], colorArray[3]))
         }

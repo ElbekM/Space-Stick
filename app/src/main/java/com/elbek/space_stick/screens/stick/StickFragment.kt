@@ -65,7 +65,10 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
         viewModel.patternsList.observe {
             it.let { patterns ->
                 stickPatternsRecyclerView.apply {
-                    layoutManager = GridLayoutManager(requireContext(), calculateNumberOfColumns())
+                    layoutManager = GridLayoutManager(
+                        requireContext(),
+                        calculateNumberOfColumns(GRID_ITEM_WIDTH_DP)
+                    )
                     adapter = PatternAdapter(
                         viewModel::onItemClicked,
                         viewModel::onItemLongClicked
@@ -118,6 +121,7 @@ class StickFragment : BaseDialogFragment<StickViewModel>(), SeekBar.OnSeekBarCha
     }
 
     companion object {
+        private const val GRID_ITEM_WIDTH_DP = 140f
         val wifiNameKey: String = ::wifiNameKey.name
 
         fun newInstance(wifiSsid: String) = StickFragment().apply {
