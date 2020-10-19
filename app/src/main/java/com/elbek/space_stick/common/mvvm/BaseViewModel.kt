@@ -22,8 +22,6 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
 
-    override fun onCleared() = coroutineContext.cancel()
-
     protected val context: Context by lazy { getApplication<Application>() }
 
     val closeCommand = LiveEvent()
@@ -32,6 +30,8 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     val showAlertDialogCommand = SingleLiveEvent<DialogRequest>()
     val requestPermissionsCommand = SingleLiveEvent<Pair<List<String>, Int>>()
     val showPermissionDialogDeniedByUserCommand = SingleLiveEvent<Pair<String, Int>>()
+
+    override fun onCleared() = coroutineContext.cancel()
 
     open fun back() = closeCommand.call()
     open fun onPermissionsResult(requestCode: Int) { }

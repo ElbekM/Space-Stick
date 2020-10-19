@@ -21,8 +21,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.CoroutineContext
 
-abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel : BaseViewModel {
+abstract class BaseDialogFragment<TViewModel : BaseViewModel> : DialogFragment(),
+    CoroutineScope by MainScope() {
 
     private val originalScreenOrientationKey: String = ::originalScreenOrientationKey.name
     private val snackbar = Snackbar()
@@ -30,6 +36,8 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
     protected abstract val viewModel: TViewModel
     protected open var customTheme: Int = R.style.AppTheme
     protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+    override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
