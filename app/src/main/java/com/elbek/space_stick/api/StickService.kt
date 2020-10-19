@@ -4,6 +4,8 @@ class StickService(private val apiController: ApiController) {
 
     suspend fun checkConnection() = apiController.checkConnection()
 
+    suspend fun switchMode(ssid: String, password: String) = apiController.switchMode(ssid, password)
+
     suspend fun setPattern(pattern: Int) = apiController.setPattern(pattern)
 
     suspend fun setSpeed(speed: Int) = apiController.setSpeed(speed)

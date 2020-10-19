@@ -69,9 +69,9 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
     }
 
     private fun initViews() {
-        checkConnectionButton.setOnClickListener {
-            viewModel.onCheckConnectionClicked()
-        }
+        checkConnectionButton.setOnClickListener { viewModel.onCheckConnectionClicked() }
+        syncButton.setOnClickListener { viewModel.onSyncClicked() }
+        syncModeButton.setOnClickListener { viewModel.onSyncModeClicked() }
     }
 
     companion object {

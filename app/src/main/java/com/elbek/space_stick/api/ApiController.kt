@@ -8,6 +8,12 @@ interface ApiController {
     @GET("api/check")
     suspend fun checkConnection()
 
+    @POST("/api/switch/mode")
+    suspend fun switchMode(
+        @Query("ssid") ssid: String,
+        @Query("password") password: String
+    )
+
     @POST("api/mode")
     suspend fun setPattern(
         @Query("pattern") pattern: Int
