@@ -1,7 +1,6 @@
 package com.elbek.space_stick.screens.main
 
 import android.Manifest
-import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
@@ -10,6 +9,7 @@ import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
+import com.elbek.space_stick.common.dialog.DialogRequest
 import com.elbek.space_stick.common.extensions.toRvalue
 import com.elbek.space_stick.common.mvvm.BaseViewModel
 import com.elbek.space_stick.common.mvvm.commands.LiveEvent
@@ -35,7 +35,6 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     val wifiSsid = SingleLiveEvent<String>()
     val connectionState = SingleLiveEvent<Boolean>()
     val launchStickScreenCommand = SingleLiveEvent<String>()
-    val showRequestDialogCommand = LiveEvent()
     val launchAppSettingsCommand = LiveEvent()
 
     override fun onPermissionsResult(requestCode: Int) {
@@ -52,7 +51,15 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     override fun permissionDeniedByUser(requestCode: Int) {
-        showRequestDialogCommand.call()
+        showAlertDialog(
+            DialogRequest(
+                title = R.string.scr_main_lbl_dialog_title.toRvalue(),
+                message = R.string.scr_main_lbl_dialog_location_permission.toRvalue(),
+                positiveButtonText = R.string.scr_main_lbl_dialog_settings.toRvalue(),
+                negativeButtonText = R.string.scr_main_lbl_dialog_cancel.toRvalue(),
+                positiveAction = { launchAppSettingsCommand.call() }
+            )
+        )
     }
 
     fun init() {
@@ -81,21 +88,6 @@ class MainViewModel(private val apiService: StickService, application: Applicati
 
     fun onSyncModeClicked() {
         //TODO: Switch to sync mode screen and enable access point
-    }
-
-    fun showDialog(context: Context) {
-        AlertDialog.Builder(context).apply {
-            setTitle(R.string.scr_main_lbl_dialog_title)
-            setMessage(R.string.scr_main_lbl_dialog_location_permission)
-            setPositiveButton(R.string.scr_main_lbl_dialog_settings) { _, _ ->
-                launchAppSettingsCommand.call()
-            }
-            setNegativeButton(R.string.scr_main_lbl_dialog_cancel) { dialog, _ ->
-                dialog.cancel()
-            }
-            create()
-            show()
-        }
     }
 
     private fun checkLocationPermission() {

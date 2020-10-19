@@ -49,10 +49,6 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
             }
         }
 
-        viewModel.showRequestDialogCommand.observe {
-            viewModel.showDialog(requireContext())
-        }
-
         viewModel.wifiSsid.observe {
             wifiNameTextView.text = it
         }

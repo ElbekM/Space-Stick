@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.KeyEvent
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -109,6 +110,26 @@ abstract class BaseDialogFragment<TViewModel> : BaseCoroutine() where TViewModel
             showSnackBarWithActionCommand.observe {
                 it?.let { (message, action) ->
                     snackbar.showMessageWithAction(requireView(), requireContext(), message, action)
+                }
+            }
+
+            showAlertDialogCommand.observe {
+                it?.let { dialog ->
+                    AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
+                        .setTitle(it.title)
+                        .setCancelable(it.isCancelable).let { builder ->
+                            builder.setMessage(it.message)
+                            builder.setPositiveButton(it.positiveButtonText) { _, _ ->
+                                it.positiveAction?.invoke()
+                            }
+                            builder.setNegativeButton(it.negativeButtonText) { dialog, _ ->
+                                dialog.dismiss()
+                                it.negativeButtonAction?.invoke()
+                            }
+                        }
+                        .create()
+                        .apply { setCanceledOnTouchOutside(it.isCancelable) }
+                        .show()
                 }
             }
         }
