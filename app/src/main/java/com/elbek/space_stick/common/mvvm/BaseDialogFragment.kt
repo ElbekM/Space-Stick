@@ -30,14 +30,14 @@ import kotlin.coroutines.CoroutineContext
 abstract class BaseDialogFragment<TViewModel : BaseViewModel> : DialogFragment(),
     CoroutineScope by MainScope() {
 
-    override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
-
     private val originalScreenOrientationKey: String = ::originalScreenOrientationKey.name
     private val snackbar = Snackbar()
 
     protected abstract val viewModel: TViewModel
     protected open var customTheme: Int = R.style.AppTheme
     protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+    override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
