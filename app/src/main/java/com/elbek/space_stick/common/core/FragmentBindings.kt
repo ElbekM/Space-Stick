@@ -17,9 +17,6 @@ interface FragmentBindings {
     fun LiveEvent.observe(block: () -> Unit) =
         this.observe(getSuitableLifecycleOwner(), Observer { block() })
 
-    private fun getSuitableLifecycleOwner() =
-        if (self.view != null) self.viewLifecycleOwner else self
-
     fun BottomSheetDialogFragment.show() =
         this.show(self.childFragmentManager, this::class.java.name)
 
@@ -28,6 +25,9 @@ interface FragmentBindings {
             .add(this, this::class.java.name)
             .addToBackStack(tag)
             .commitAllowingStateLoss()
+
+    private fun getSuitableLifecycleOwner() =
+        if (self.view != null) self.viewLifecycleOwner else self
 }
 
 val Fragment.parent: Any?

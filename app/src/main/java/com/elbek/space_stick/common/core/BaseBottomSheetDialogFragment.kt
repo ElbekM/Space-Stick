@@ -45,6 +45,10 @@ abstract class BaseBottomSheetDialogFragment<TViewModel : BaseViewModel>
         }
     }
 
+    protected open fun bindViewModel() {
+        viewModel.closeCommand.observe { dismissAllowingStateLoss() }
+    }
+
     fun updateBottomSheetPickHeight(view: View) {
         ObjectAnimator.ofInt(
             bottomSheetBehavior, "peekHeight",
@@ -54,9 +58,5 @@ abstract class BaseBottomSheetDialogFragment<TViewModel : BaseViewModel>
                 duration = 250
                 start()
             }
-    }
-
-    protected open fun bindViewModel() {
-        viewModel.closeCommand.observe { dismissAllowingStateLoss() }
     }
 }

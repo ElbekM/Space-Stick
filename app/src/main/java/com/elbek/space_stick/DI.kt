@@ -5,6 +5,7 @@ import com.elbek.space_stick.api.ApiController
 import com.elbek.space_stick.api.ApiServiceProvider
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.screens.main.MainViewModel
+import com.elbek.space_stick.screens.main.sync.SyncBottomSheetViewModel
 import com.elbek.space_stick.screens.patternSettings.PatternSettingsViewModel
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsViewModel
 import com.elbek.space_stick.screens.settings.SettingsViewModel
@@ -33,6 +34,7 @@ fun initDI(context: Context) {
             viewModel<SettingsViewModel>()
             viewModel<RgbSettingsViewModel>()
             viewModel<PatternSettingsViewModel>()
+            viewModel<SyncBottomSheetViewModel>()
         })
     }
 }

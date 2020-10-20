@@ -24,18 +24,19 @@ import kotlinx.coroutines.withContext
 class MainViewModel(private val apiService: StickService, application: Application) :
     BaseViewModel(application) {
 
-    private var deviceApSsid: String? = null
-    private var deviceApPass: String? = null
-
     private val wifiManager by lazy {
         (context.applicationContext
             .getSystemService(Context.WIFI_SERVICE) as WifiManager)
     }
 
+    private var deviceApSsid: String? = null
+    private var deviceApPass: String? = null
+
+    val launchAppSettingsCommand = LiveEvent()
     val wifiSsid = SingleLiveEvent<String>()
     val connectionState = SingleLiveEvent<Boolean>()
     val launchStickScreenCommand = SingleLiveEvent<String>()
-    val launchAppSettingsCommand = LiveEvent()
+    val launchSyncBottomSheetCommand = SingleLiveEvent<Pair<String?, String?>>()
 
     override fun onPermissionsResult(requestCode: Int) {
         super.onPermissionsResult(requestCode)
@@ -77,13 +78,8 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     fun onSyncClicked() {
-        getDeviceAccessPointInfo()
-        if (deviceApSsid.isNullOrEmpty() && deviceApPass.isNullOrEmpty()) {
-            //TODO: showDialog with fields
-        } else {
-            sendAccessPointInfo()
-        }
-
+        // getDeviceAccessPointInfo()
+        launchSyncBottomSheetCommand.value = Pair("Lolka", "Fiolka")
     }
 
     fun onSyncModeClicked() {

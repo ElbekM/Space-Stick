@@ -8,8 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
-import com.elbek.space_stick.common.extensions.toRvalue
 import com.elbek.space_stick.common.core.BaseDialogFragment
+import com.elbek.space_stick.common.extensions.toRvalue
+import com.elbek.space_stick.screens.main.sync.SyncBottomSheetFragment
 import com.elbek.space_stick.screens.stick.StickFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,6 +46,14 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
             Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                 data = Uri.fromParts("package", requireActivity().packageName, null)
                 startActivity(this)
+            }
+        }
+
+        viewModel.launchSyncBottomSheetCommand.observe {
+            it?.let { (ssid, password) ->
+                SyncBottomSheetFragment
+                    .newInstance(ssid, password)
+                    .show()
             }
         }
 
