@@ -3,8 +3,8 @@ package com.elbek.space_stick.screens.patternSettings
 import android.app.Application
 import android.graphics.Color
 import com.elbek.space_stick.api.StickService
-import com.elbek.space_stick.common.mvvm.BaseViewModel
-import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.common.core.BaseViewModel
+import com.elbek.space_stick.common.core.commands.SingleLiveEvent
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 

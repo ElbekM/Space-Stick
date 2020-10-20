@@ -11,9 +11,9 @@ import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.dialog.DialogRequest
 import com.elbek.space_stick.common.extensions.toRvalue
-import com.elbek.space_stick.common.mvvm.BaseViewModel
-import com.elbek.space_stick.common.mvvm.commands.LiveEvent
-import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.common.core.BaseViewModel
+import com.elbek.space_stick.common.core.commands.LiveEvent
+import com.elbek.space_stick.common.core.commands.SingleLiveEvent
 import com.elbek.space_stick.common.utils.Constants
 import com.elbek.space_stick.common.utils.Utils
 import kotlinx.coroutines.Dispatchers

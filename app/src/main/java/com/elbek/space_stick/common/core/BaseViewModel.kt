@@ -1,4 +1,4 @@
-package com.elbek.space_stick.common.mvvm
+package com.elbek.space_stick.common.core
 
 import android.app.Application
 import android.content.Context
@@ -11,8 +11,8 @@ import androidx.lifecycle.AndroidViewModel
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.dialog.DialogRequest
 import com.elbek.space_stick.common.extensions.toRvalue
-import com.elbek.space_stick.common.mvvm.commands.LiveEvent
-import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.common.core.commands.LiveEvent
+import com.elbek.space_stick.common.core.commands.SingleLiveEvent
 import kotlinx.coroutines.*
 import java.net.ConnectException
 import java.net.SocketTimeoutException
