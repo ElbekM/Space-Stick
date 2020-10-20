@@ -32,7 +32,9 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     private var deviceApSsid: String? = null
     private var deviceApPass: String? = null
 
-    val launchAppSettingsCommand = LiveEvent()
+    val launchSystemSettingsCommand = LiveEvent()
+    val launchNetworkSettingsCommand = LiveEvent()
+
     val wifiSsid = SingleLiveEvent<String>()
     val connectionState = SingleLiveEvent<Boolean>()
     val launchStickScreenCommand = SingleLiveEvent<String>()
@@ -58,7 +60,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
                 message = R.string.scr_main_lbl_dialog_location_permission.toRvalue(),
                 positiveButtonText = R.string.scr_main_lbl_dialog_settings.toRvalue(),
                 negativeButtonText = R.string.scr_main_lbl_dialog_cancel.toRvalue(),
-                positiveAction = { launchAppSettingsCommand.call() }
+                positiveAction = { launchSystemSettingsCommand.call() }
             )
         )
     }
@@ -83,7 +85,19 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     fun onSyncModeClicked() {
-        //TODO: Switch to sync mode screen and enable access point
+        if (checkWifiHotspot()) {
+            //TODO: Switch to sync mode screen
+        } else {
+            showAlertDialog(
+                DialogRequest(
+                    title = "Sync mode",
+                    message = "For sync mode enable Wifi Hotspot",
+                    positiveButtonText = R.string.scr_main_lbl_dialog_settings.toRvalue(),
+                    negativeButtonText = R.string.scr_main_lbl_dialog_cancel.toRvalue(),
+                    positiveAction = { launchNetworkSettingsCommand.call() }
+                )
+            )
+        }
     }
 
     private fun checkLocationPermission() {
@@ -140,6 +154,16 @@ class MainViewModel(private val apiService: StickService, application: Applicati
         }
     }
 
+    private fun checkWifiHotspot(): Boolean {
+        val methods = wifiManager.javaClass.declaredMethods
+        for (method in methods) {
+            if (method.name == "isWifiApEnabled") {
+                return method.invoke(wifiManager) as Boolean
+            }
+        }
+        return false
+    }
+
     private fun sendAccessPointInfo() = launch {
         try {
             apiService.switchMode(deviceApSsid!!, deviceApPass!!)
@@ -151,7 +175,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     private fun checkSharedPref() {
-        //TODO: clear shared pref
+        //TODO: clear shared pref, shared pref ops into Storage class
         //TODO: not wifi name, use some wifi uuid, fix case with default value
         val preferences = context.getSharedPreferences(Constants.APP_PREFERENCES, Context.MODE_PRIVATE)
         if (preferences.contains(Constants.APP_PREFERENCES_WIFI)) {

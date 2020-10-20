@@ -42,9 +42,15 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
                 .showAllowingStateLoss(childFragmentManager)
         }
 
-        viewModel.launchAppSettingsCommand.observe {
+        viewModel.launchSystemSettingsCommand.observe {
             Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                 data = Uri.fromParts("package", requireActivity().packageName, null)
+                startActivity(this)
+            }
+        }
+
+        viewModel.launchNetworkSettingsCommand.observe {
+            Intent(Settings.ACTION_WIRELESS_SETTINGS).apply {
                 startActivity(this)
             }
         }
