@@ -2,7 +2,7 @@ package com.elbek.space_stick.screens.patternSettings
 
 import android.app.Application
 import com.elbek.space_stick.api.StickService
-import com.elbek.space_stick.common.mvvm.BaseViewModel
+import com.elbek.space_stick.common.core.BaseViewModel
 import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.models.Rgb
 import kotlinx.coroutines.launch

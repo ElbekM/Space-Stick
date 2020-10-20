@@ -1,11 +1,11 @@
-package com.elbek.space_stick.common.mvvm
+package com.elbek.space_stick.common.core
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import com.elbek.space_stick.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,7 +17,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseBottomSheetDialogFragment<TViewModel : BaseViewModel>
-    : BottomSheetDialogFragment(), CoroutineScope by MainScope() {
+    : BottomSheetDialogFragment(), CoroutineScope by MainScope(), FragmentBindings {
 
     protected abstract val viewModel: TViewModel
 
@@ -25,6 +25,8 @@ abstract class BaseBottomSheetDialogFragment<TViewModel : BaseViewModel>
     private lateinit var coordinatorLayout: CoordinatorLayout
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
+    override val self: Fragment
+        get() = this
 
     override fun getTheme(): Int = R.style.AppBottomSheetDialogTheme
 
@@ -55,10 +57,6 @@ abstract class BaseBottomSheetDialogFragment<TViewModel : BaseViewModel>
     }
 
     protected open fun bindViewModel() {
-        viewModel.closeCommand.observe(viewLifecycleOwner, Observer {
-            dismissAllowingStateLoss()
-        })
+        viewModel.closeCommand.observe { dismissAllowingStateLoss() }
     }
 }
-
-fun BottomSheetDialogFragment.show() = this.show(childFragmentManager, this::class.java.name)

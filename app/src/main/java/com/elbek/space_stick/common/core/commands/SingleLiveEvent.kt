@@ -1,4 +1,4 @@
-package com.elbek.space_stick.common.mvvm.commands
+package com.elbek.space_stick.common.core.commands
 
 import android.util.Log
 import androidx.annotation.MainThread

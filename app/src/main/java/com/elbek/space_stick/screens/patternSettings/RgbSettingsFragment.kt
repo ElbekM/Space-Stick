@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
-import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.common.core.BaseDialogFragment
 import com.elbek.space_stick.models.ColorType
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import kotlinx.android.synthetic.main.fragment_rgb_settings.*

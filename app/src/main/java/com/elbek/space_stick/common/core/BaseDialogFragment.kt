@@ -1,9 +1,7 @@
-package com.elbek.space_stick.common.mvvm
+package com.elbek.space_stick.common.core
 
 import com.elbek.space_stick.R
-
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -16,10 +14,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import com.elbek.space_stick.common.mvvm.commands.LiveEvent
 import com.elbek.space_stick.common.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +22,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseDialogFragment<TViewModel : BaseViewModel> : DialogFragment(),
-    CoroutineScope by MainScope() {
+    CoroutineScope by MainScope(), FragmentBindings {
 
     private val originalScreenOrientationKey: String = ::originalScreenOrientationKey.name
     private val snackbar = Snackbar()
@@ -38,6 +32,8 @@ abstract class BaseDialogFragment<TViewModel : BaseViewModel> : DialogFragment()
     protected open val screenOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
+    override val self: Fragment
+        get() = this
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +87,10 @@ abstract class BaseDialogFragment<TViewModel : BaseViewModel> : DialogFragment()
         viewModel.onPermissionsResult(requestCode)
     }
 
+    protected open fun close() = dismissAllowingStateLoss()
+
+    protected open fun onBackPressed() = viewModel.back()
+
     protected open fun bindViewModel() {
         with(viewModel) {
             closeCommand.observe { close() }
@@ -142,40 +142,4 @@ abstract class BaseDialogFragment<TViewModel : BaseViewModel> : DialogFragment()
             }
         }
     }
-
-    protected open fun close() = dismissAllowingStateLoss()
-
-    protected open fun onBackPressed() = viewModel.back()
-
-    fun <T> LiveData<T>.observe(observer: (item: T?) -> Unit) =
-        observe(getSuitableLifecycleOwner(), Observer(observer))
-
-    fun LiveEvent.observe(block: () -> Unit) =
-        this.observe(getSuitableLifecycleOwner(), Observer { block() })
-
-    private fun getSuitableLifecycleOwner() =
-        if (view != null) viewLifecycleOwner else this
-}
-
-fun DialogFragment.showAllowingStateLoss(fm: FragmentManager, tag: String = this::class.java.name) =
-    fm.beginTransaction()
-        .add(this, tag)
-        .addToBackStack(tag)
-        .commitAllowingStateLoss()
-
-val Fragment.parent: Any?
-    get() = parentFragment ?: activity
-
-inline fun <reified T> Fragment.castParent(): T? = parent as? T
-
-inline fun <reified T> Fragment.findParentOfType(): T? {
-    var parent = parent
-    while (parent != null) {
-        when (parent) {
-            is T -> return parent
-            is Activity -> return null
-            is Fragment -> parent = parent.parent
-        }
-    }
-    return null
 }
