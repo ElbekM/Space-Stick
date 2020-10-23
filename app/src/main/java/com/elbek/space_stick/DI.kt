@@ -4,6 +4,8 @@ import android.content.Context
 import com.elbek.space_stick.api.ApiController
 import com.elbek.space_stick.api.ApiServiceProvider
 import com.elbek.space_stick.api.StickService
+import com.elbek.space_stick.database.ColorDatabase
+import com.elbek.space_stick.database.ColorDatabaseProvider
 import com.elbek.space_stick.screens.main.MainViewModel
 import com.elbek.space_stick.screens.patternSettings.PatternSettingsViewModel
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsViewModel
@@ -20,8 +22,10 @@ fun initDI(context: Context) {
         androidContext(context)
         modules(module {
             single<ApiServiceProvider>()
+            single<ColorDatabaseProvider>()
             single<StickService>()
 
+            single { ColorDatabase.newInstance(context) }
             single {
                 this.get<ApiServiceProvider>(ApiServiceProvider::class, null, null)
                     .spaceStickRetrofit
