@@ -4,8 +4,8 @@ import android.app.Application
 import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.extensions.appVersionName
-import com.elbek.space_stick.common.mvvm.BaseViewModel
-import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.common.core.BaseViewModel
+import com.elbek.space_stick.common.core.commands.SingleLiveEvent
 
 class SettingsViewModel(private val apiService: StickService, application: Application) :
     BaseViewModel(application) {

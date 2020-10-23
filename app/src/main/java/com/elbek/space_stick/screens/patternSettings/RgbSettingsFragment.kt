@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.elbek.space_stick.R
-import com.elbek.space_stick.common.mvvm.BaseDialogFragment
 import com.elbek.space_stick.common.utils.AnimationUtils.showWithAnimation
 import com.elbek.space_stick.common.utils.Utils.calculateNumberOfColumns
+import com.elbek.space_stick.common.core.BaseDialogFragment
 import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.screens.patternSettings.adaper.CustomColorAdapter
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener

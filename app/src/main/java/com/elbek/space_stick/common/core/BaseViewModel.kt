@@ -1,4 +1,4 @@
-package com.elbek.space_stick.common.mvvm
+package com.elbek.space_stick.common.core
 
 import android.app.Application
 import android.content.Context
@@ -9,9 +9,10 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import com.elbek.space_stick.R
+import com.elbek.space_stick.common.dialog.DialogRequest
 import com.elbek.space_stick.common.extensions.toRvalue
-import com.elbek.space_stick.common.mvvm.commands.LiveEvent
-import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.common.core.commands.LiveEvent
+import com.elbek.space_stick.common.core.commands.SingleLiveEvent
 import kotlinx.coroutines.*
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -21,15 +22,16 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
 
     override val coroutineContext: CoroutineContext = Dispatchers.IO + SupervisorJob()
 
-    override fun onCleared() = coroutineContext.cancel()
-
     protected val context: Context by lazy { getApplication<Application>() }
 
     val closeCommand = LiveEvent()
     val showSnackBarWithActionCommand = SingleLiveEvent<Pair<String, (() -> Unit)>>()
     val showSnackBarCommand = SingleLiveEvent<String>()
+    val showAlertDialogCommand = SingleLiveEvent<DialogRequest>()
     val requestPermissionsCommand = SingleLiveEvent<Pair<List<String>, Int>>()
     val showPermissionDialogDeniedByUserCommand = SingleLiveEvent<Pair<String, Int>>()
+
+    override fun onCleared() = coroutineContext.cancel()
 
     open fun back() = closeCommand.call()
     open fun onPermissionsResult(requestCode: Int) { }
@@ -60,6 +62,12 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     protected fun showSnackBarWithAction(message: String, action: () -> Unit) {
         launch(Dispatchers.Main) {
             showSnackBarWithActionCommand.postValue(Pair(message, action))
+        }
+    }
+
+    protected fun showAlertDialog(dialogRequest: DialogRequest) {
+        launch(Dispatchers.Main) {
+            showAlertDialogCommand.postValue(dialogRequest)
         }
     }
 

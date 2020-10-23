@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import com.elbek.space_stick.R
-import com.elbek.space_stick.common.mvvm.BaseDialogFragment
+import com.elbek.space_stick.common.core.BaseDialogFragment
 import com.elbek.space_stick.screens.stick.StickFragment.Companion.wifiNameKey
 import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.fragment_settings.backImageView

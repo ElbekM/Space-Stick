@@ -9,8 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.extensions.getColorCompat
-import com.elbek.space_stick.common.mvvm.BaseDialogFragment
-import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
+import com.elbek.space_stick.common.core.BaseDialogFragment
 import com.elbek.space_stick.common.utils.Utils.calculateNumberOfColumns
 import com.elbek.space_stick.screens.patternSettings.PatternSettingsFragment
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsFragment

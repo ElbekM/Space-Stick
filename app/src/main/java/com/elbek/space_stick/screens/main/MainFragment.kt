@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.elbek.space_stick.R
 import com.elbek.space_stick.common.extensions.toRvalue
-import com.elbek.space_stick.common.mvvm.BaseDialogFragment
-import com.elbek.space_stick.common.mvvm.showAllowingStateLoss
+import com.elbek.space_stick.common.core.BaseDialogFragment
 import com.elbek.space_stick.screens.stick.StickFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -47,10 +46,6 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
                 data = Uri.fromParts("package", requireActivity().packageName, null)
                 startActivity(this)
             }
-        }
-
-        viewModel.showRequestDialogCommand.observe {
-            viewModel.showDialog(requireContext())
         }
 
         viewModel.wifiSsid.observe {

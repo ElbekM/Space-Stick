@@ -3,9 +3,9 @@ package com.elbek.space_stick.screens.patternSettings
 import android.app.Application
 import android.content.Context
 import com.elbek.space_stick.api.StickService
-import com.elbek.space_stick.common.mvvm.BaseViewModel
-import com.elbek.space_stick.common.mvvm.commands.LiveEvent
-import com.elbek.space_stick.common.mvvm.commands.SingleLiveEvent
+import com.elbek.space_stick.common.core.BaseViewModel
+import com.elbek.space_stick.common.core.commands.LiveEvent
+import com.elbek.space_stick.common.core.commands.SingleLiveEvent
 import com.elbek.space_stick.database.ColorDatabaseProvider
 import com.elbek.space_stick.models.ColorType
 import com.elbek.space_stick.models.Rgb
