@@ -63,15 +63,6 @@
                 app:palette="@drawable/palette"
                 app:selector="@drawable/wheel" />
         </com.google.android.material.card.MaterialCardView>
-
-        <include
-            android:id="@+id/customColorsLayout"
-            layout="@layout/view_custom_colors"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="55dp"
-            android:visibility="gone"/>
     </RelativeLayout>
 
     <include
@@ -80,4 +71,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
+
+    <include
+        android:id="@+id/customColorsLayout"
+        layout="@layout/view_custom_colors"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </RelativeLayout>

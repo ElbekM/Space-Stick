@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.View
 
-const val DEFAULT_ANIMATION_DURATION = 300L
+private const val DEFAULT_ANIMATION_DURATION = 300L
 
 object AnimationUtils {
 

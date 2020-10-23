@@ -51,7 +51,7 @@ class RgbSettingsFragment : BaseDialogFragment<RgbSettingsViewModel>() {
             viewModel.showColorPickerDialog(requireContext())
         }
 
-        viewModel.customColorList.observe { colors ->
+        viewModel.customColors.observe { colors ->
             with(customColorsRecyclerView) {
                 var colorAdapter = adapter as? CustomColorAdapter
                 if (colorAdapter == null) {

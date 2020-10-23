@@ -21,10 +21,12 @@ class RgbSettingsViewModel(
     application: Application
 ) : BaseViewModel(application) {
 
+    private var customColorList = mutableListOf<Rgb>()
+
     val showColorPickerDialogLiveEvent = LiveEvent()
     val addColorTextVisible = SingleLiveEvent<Boolean>()
     val customColorsLayoutVisible = SingleLiveEvent<Boolean>()
-    val customColorList = SingleLiveEvent<MutableList<Rgb>>()
+    val customColors = SingleLiveEvent<MutableList<Rgb>>()
 
     override fun back() {
         customColorsLayoutVisible.value.let { visible ->
@@ -37,7 +39,8 @@ class RgbSettingsViewModel(
 
     fun init() = launch {
         colorDatabaseProvider.getCustomColors().let { colors ->
-            customColorList.postValue(colors ?: mutableListOf())
+            customColorList = colors ?: mutableListOf()
+            customColors.postValue(customColorList)
             withContext(Dispatchers.Main) {
                 addColorTextVisible.value = colors.isNullOrEmpty()
             }
@@ -54,7 +57,7 @@ class RgbSettingsViewModel(
     }
 
     fun onChangeColorClicked(position: Int) {
-        customColorList.value?.let { setColor(it[position]) }
+        setColor(customColorList[position])
     }
 
     fun onCustomColorsClicked() {
@@ -99,10 +102,9 @@ class RgbSettingsViewModel(
     private fun addColorToDatabase(colorArray: IntArray) {
         addColorTextVisible.value = false
 
-        customColorList.value = customColorList.value?.apply {
-            add(Rgb(colorArray[1], colorArray[2], colorArray[3]))
-        }
-        customColorList.value?.let {
+        customColorList.add(Rgb(colorArray[1], colorArray[2], colorArray[3]))
+        customColorList.let {
+            customColors.value = it
             launch { colorDatabaseProvider.addColorToDatabase(it[it.lastIndex]) }
         }
     }
