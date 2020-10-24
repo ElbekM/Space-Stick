@@ -5,7 +5,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.wifi.SupplicantState
-import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
@@ -80,13 +79,16 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     }
 
     fun onSyncClicked() {
-        // getDeviceAccessPointInfo()
-        launchSyncBottomSheetCommand.value = Pair("Lolka", "Fiolka")
+        /** getDeviceAccessPointInfo()
+        * Application needs to be signed by the platform key
+        * to access Wifi Hotspot info */
+
+        launchSyncBottomSheetCommand.value = Pair(deviceApSsid, deviceApPass)
     }
 
     fun onSyncModeClicked() {
         if (checkWifiHotspot()) {
-            //TODO: Switch to sync mode screen
+            //TODO: Switch to sync mode screen (send ssid and password)
         } else {
             showAlertDialog(
                 DialogRequest(
@@ -121,18 +123,6 @@ class MainViewModel(private val apiService: StickService, application: Applicati
             }
         } else {
             //TODO: enable wifi dialog
-        }
-    }
-
-    private fun getDeviceAccessPointInfo() {
-        //TODO: check permissions
-        val methods = wifiManager.javaClass.declaredMethods
-        for (method in methods) {
-            if (method.name == "getWifiApConfiguration") {
-                val config = method.invoke(wifiManager) as WifiConfiguration
-                deviceApSsid = config.SSID
-                deviceApPass = config.BSSID
-            }
         }
     }
 
