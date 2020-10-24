@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/stickInfoRelativeLayout"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="26dp">
 
         <TextView
@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/brightnessSeekBar"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="10dp"
             android:text="@string/scr_stick_lbl_speed"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -101,15 +101,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/speedTextView"
             android:layout_marginTop="5dp"
-            android:max="100"
-            android:progress="10" />
+            android:max="200"
+            android:progress="100" />
 
         <LinearLayout
             android:id="@+id/stickPlayerLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/speedSeekBar"
-            android:layout_marginTop="26dp">
+            android:layout_marginTop="15dp">
 
             <ImageView
                 android:id="@+id/previousButtonImageView"
@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/main"
         android:layout_marginStart="26dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="10dp"
         android:clipToPadding="false"

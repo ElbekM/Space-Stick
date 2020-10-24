@@ -60,7 +60,7 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onPlayPauseButtonClicked() {
-        setPattern(if (onPause.value!!) patternPosition else 0)
+        setPattern(if (onPause.value!!) patternPosition else PatternType.CONSTANT.position)
         onPause.value = !onPause.value!!
     }
 
@@ -75,7 +75,8 @@ class StickViewModel(private val apiService: StickService, application: Applicat
     }
 
     fun onItemLongClicked(position: Int) {
-        if (position == PatternType.JEDI.position) {
+        if (position == PatternType.CONSTANT.position) {
+            setPattern(position)
             launchRgbSettingsScreen.call()
         } else {
             launchPatternSettingsScreen.call()
@@ -89,7 +90,6 @@ class StickViewModel(private val apiService: StickService, application: Applicat
             delay(3000)
             setPattern(PatternType.DEFAULT.position)
             setBrightness(100)
-            setSpeed(10)
         }
     }
 
