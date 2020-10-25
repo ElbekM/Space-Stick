@@ -12,6 +12,7 @@ import com.elbek.space_stick.common.core.BaseDialogFragment
 import com.elbek.space_stick.common.extensions.toRvalue
 import com.elbek.space_stick.screens.main.sync.SyncBottomSheetFragment
 import com.elbek.space_stick.screens.stick.StickFragment
+import com.elbek.space_stick.screens.sync.SyncFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -61,6 +62,12 @@ class MainFragment : BaseDialogFragment<MainViewModel>() {
                     .newInstance(ssid, password)
                     .show()
             }
+        }
+
+        viewModel.launchSyncScreenCommand.observe {
+            SyncFragment
+                .newInstance()
+                .showAllowingStateLoss(childFragmentManager)
         }
 
         viewModel.wifiSsid.observe {

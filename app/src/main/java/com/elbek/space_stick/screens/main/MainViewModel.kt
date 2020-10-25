@@ -33,6 +33,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
 
     val launchSystemSettingsCommand = LiveEvent()
     val launchNetworkSettingsCommand = LiveEvent()
+    val launchSyncScreenCommand = LiveEvent()
 
     val wifiSsid = SingleLiveEvent<String>()
     val connectionState = SingleLiveEvent<Boolean>()
@@ -89,6 +90,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
     fun onSyncModeClicked() {
         if (checkWifiHotspot()) {
             //TODO: Switch to sync mode screen (send ssid and password)
+            launchSyncScreenCommand.call()
         } else {
             showAlertDialog(
                 DialogRequest(

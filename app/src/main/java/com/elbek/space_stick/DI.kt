@@ -10,6 +10,7 @@ import com.elbek.space_stick.screens.patternSettings.PatternSettingsViewModel
 import com.elbek.space_stick.screens.patternSettings.RgbSettingsViewModel
 import com.elbek.space_stick.screens.settings.SettingsViewModel
 import com.elbek.space_stick.screens.stick.StickViewModel
+import com.elbek.space_stick.screens.sync.SyncViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.experimental.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -32,6 +33,7 @@ fun initDI(context: Context) {
             viewModel<MainViewModel>()
             viewModel<StickViewModel>()
             viewModel<SettingsViewModel>()
+            viewModel<SyncViewModel>()
             viewModel<RgbSettingsViewModel>()
             viewModel<PatternSettingsViewModel>()
             viewModel<SyncBottomSheetViewModel>()

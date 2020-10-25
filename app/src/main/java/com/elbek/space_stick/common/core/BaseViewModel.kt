@@ -92,4 +92,10 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         }
         exception.printStackTrace()
     }
+
+    protected fun loggError(exception: Exception) {
+        launch(Dispatchers.Main) {
+            exception.printStackTrace()
+        }
+    }
 }
