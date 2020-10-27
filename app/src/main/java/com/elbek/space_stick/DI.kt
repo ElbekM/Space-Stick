@@ -1,9 +1,7 @@
 package com.elbek.space_stick
 
 import android.content.Context
-import com.elbek.space_stick.api.ApiController
-import com.elbek.space_stick.api.ApiServiceProvider
-import com.elbek.space_stick.api.StickService
+import com.elbek.space_stick.api.*
 import com.elbek.space_stick.screens.main.MainViewModel
 import com.elbek.space_stick.screens.main.sync.SyncBottomSheetViewModel
 import com.elbek.space_stick.screens.patternSettings.PatternSettingsViewModel
@@ -23,11 +21,18 @@ fun initDI(context: Context) {
         modules(module {
             single<ApiServiceProvider>()
             single<StickService>()
+            single<StickSyncService>()
 
             single {
                 this.get<ApiServiceProvider>(ApiServiceProvider::class, null, null)
                     .spaceStickRetrofit
                     .create(ApiController::class.java)
+            }
+
+            single {
+                this.get<ApiServiceProvider>(ApiServiceProvider::class, null, null)
+                    .spaceStickRetrofit
+                    .create(ApiSyncController::class.java)
             }
 
             viewModel<MainViewModel>()
