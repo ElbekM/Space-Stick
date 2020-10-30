@@ -78,7 +78,7 @@ class MainViewModel(private val apiService: StickService, application: Applicati
                 title = R.string.scr_main_lbl_dialog_title.toRvalue(),
                 message = R.string.scr_main_lbl_dialog_location_permission.toRvalue(),
                 positiveButtonText = R.string.scr_main_lbl_dialog_settings.toRvalue(),
-                negativeButtonText = R.string.scr_main_lbl_dialog_cancel.toRvalue(),
+                negativeButtonText = R.string.scr_any_msg_cancel.toRvalue(),
                 positiveAction = { launchAppSettingsCommand.call() }
             )
         )

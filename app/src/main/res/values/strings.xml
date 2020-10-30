@@ -2,6 +2,8 @@
     <string name="app_name">Space Stick</string>
 
     <string name="scr_any_msg_ok">OK</string>
+    <string name="scr_any_msg_cancel">Cancel</string>
+    <string name="scr_any_msg_save">Save</string>
     <string name="scr_any_msg_retry">Retry</string>
     <string name="scr_any_msg_success">SUCCESS</string>
     <string name="scr_any_msg_error_no_connection">No internet connection</string>
@@ -13,7 +15,6 @@
     <string name="scr_main_lbl_dialog_title">WARNING</string>
     <string name="scr_main_lbl_dialog_location_permission">To correct work app need location permission</string>
     <string name="scr_main_lbl_dialog_settings">Go to settings</string>
-    <string name="scr_main_lbl_dialog_cancel">Cancel</string>
 
     <string name="scr_stick_lbl_model">Orion</string>
     <string name="scr_stick_lbl_brightness">Brightness</string>
@@ -28,6 +29,11 @@
     <string name="scr_settings_lbl_about_us">About us</string>
     <string name="scr_settings_lbl_rate_us">Rate us</string>
     <string name="scr_settings_lbl_version">Version %s</string>
+
+    <string name="scr_rgb_settings_lbl_color_picker">Choose color</string>
+    <string name="scr_rgb_settings_lbl_custom_colors">Custom colors</string>
+    <string name="scr_rgb_settings_lbl_own_colors">Add your own colors!</string>
+    <string name="scr_rgb_settings_lbl_new_color">Add new color</string>
 
     <string name="scr_rgb_settings_lbl_tab_title">Pattern settings</string>
 </resources>

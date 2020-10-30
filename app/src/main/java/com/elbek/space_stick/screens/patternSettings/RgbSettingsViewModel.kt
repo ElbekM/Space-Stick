@@ -2,6 +2,7 @@ package com.elbek.space_stick.screens.patternSettings
 
 import android.app.Application
 import android.content.Context
+import com.elbek.space_stick.R
 import com.elbek.space_stick.api.StickService
 import com.elbek.space_stick.common.core.BaseViewModel
 import com.elbek.space_stick.common.core.commands.LiveEvent
@@ -70,11 +71,11 @@ class RgbSettingsViewModel(
 
     fun showColorPickerDialog(context: Context) {
         ColorPickerDialog.Builder(context)
-            .setTitle("ColorPicker Dialog")
-            .setPositiveButton("Save", ColorEnvelopeListener { envelope, _ ->
+            .setTitle(R.string.scr_rgb_settings_lbl_color_picker)
+            .setPositiveButton(R.string.scr_any_msg_save, ColorEnvelopeListener { envelope, _ ->
                 addColorToDatabase(envelope.argb)
             })
-            .setNegativeButton("Cancel") { dialogInterface, _ ->
+            .setNegativeButton(R.string.scr_any_msg_cancel) { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }
             .attachAlphaSlideBar(false)
